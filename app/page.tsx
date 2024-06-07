@@ -20,7 +20,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center w-screen min-h-screen overflow-hidden bg-black from-black via-zinc-600/20 to-black relative">
       <style jsx global>{`
         body {
-          font-family: 'Phonk, sans-serif';
+          font-family: 'Phonk';
         }
       `}</style>
 

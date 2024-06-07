@@ -3,8 +3,8 @@ import React from "react";
 import { ProjectLayout } from "../components/project-layout";
 import { Footer } from "@/app/components/footer";
 
-const previoustitle = "Courts Métrages";
-const nexttitle = "Publicités";
+const previoustitle = "Courts Metrages";
+const nexttitle = "Publicites";
 const nextVisible = true;
 const previousVisible = true;
 

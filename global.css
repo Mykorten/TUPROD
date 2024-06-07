@@ -8,3 +8,12 @@
   }
 } 
 
+@font-face {
+  font-family: "Phonk";
+  src: url("./public/fonts/Phonk-Regular-DEMO.otf");
+}
+
+@font-face {
+  font-family: "Futura";
+  src: url("./public/fonts/Futura-PT/FuturaPTMedium.otf");
+}

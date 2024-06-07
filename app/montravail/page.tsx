@@ -8,7 +8,7 @@ export default function ProjectsPage() {
       <div className="flex flex-col items-center justify-center mt-32 mb-16 relative ">
         <h2
           className="text-4xl text-gray-100 duration-500 font-display sm:text-6xl md:text-7xl"
-          style={{ fontFamily: "Phosphate, sans-serif" }}
+          style={{ fontFamily: "Phonk" }}
         >
           projets
 

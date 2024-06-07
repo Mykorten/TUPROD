@@ -4,7 +4,7 @@ import { ProjectLayout } from "../components/project-layout";
 import { Footer } from "@/app/components/footer";
 
 const previoustitle = "";
-const nexttitle = "Courts Métrages";
+const nexttitle = "Courts Metrages";
 const nextVisible = true;
 const previousVisible = false;
 

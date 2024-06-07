@@ -22,7 +22,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
             <div className="flex flex-col items-center justify-center mt-32 mb-16 relative z-10">
                 <h1
                     className="text-4xl text-zinc-100 duration-500 font-display sm:text-6xl md:text-7xl"
-                    style={{ fontFamily: "Phosphate, sans-serif" }}
+                    style={{ fontFamily: "Phonk" }}
                 >
                     {title}
                 </h1>
@@ -35,7 +35,9 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
                             <source src={`${source}/${video.src}`} type="video/mp4" />
                         </video>
                         {video.legende ? (
-                            <div className="caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-2 text-right opacity-0 transition-opacity duration-300">
+                            <div className="caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-2 text-right text-3xl opacity-0 transition-opacity duration-300"
+                                style={{ fontFamily: "Futura" }}
+                            >
                                 {video.legende}
                             </div>
                         ) : null}
