@@ -38,4 +38,4 @@ next-env.d.ts
 .contentlayer
 
 # Exclusion des vidéos
-/public/montravail/*
+/public/montravail/*/*
