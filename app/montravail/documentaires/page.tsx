@@ -3,12 +3,12 @@ import React from "react";
 import { ProjectLayout } from "../components/project-layout";
 import { Footer } from "@/app/components/footer";
 
-const previoustitle = "Courts Metrages";
-const nexttitle = "Publicites";
+const previoustitle = "COURTS METRAGES";
+const nexttitle = "PUBLICITES";
 const nextVisible = true;
 const previousVisible = true;
 
-const title = "Documentaires";
+const title = "DOCUMENTAIRES";
 const videos = [
     { src: "jbmoreno.mov", legende: "Une série de documentaires fascinante" },
 ];

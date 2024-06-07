@@ -37,14 +37,14 @@ export const Navigation: React.FC = () => {
 								className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
 								style={{ fontSize: "1.15rem", fontFamily: "Phonk" }}
 							>
-								Notre travail
+								NOTRE TRAVAIL
 							</Link>
 							<Link
 								href="/contact"
 								className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
 								style={{ fontSize: "1.15rem", fontFamily: "Phonk" }}
 							>
-								Contact
+								CONTACT
 							</Link>
 						</ul>
 					</nav>

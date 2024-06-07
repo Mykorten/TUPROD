@@ -15,6 +15,14 @@ interface ProjectLayoutProps {
 }
 
 export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, videos }) => {
+    // Calculate the width class based on the number of videos
+    const getWidthClass = (numVideos: number) => {
+        if (numVideos === 1) return "w-full";
+        return `w-1/${numVideos}`; // Pour plus d'une vidéo
+    };
+
+    const widthClass = getWidthClass(videos.length);
+
     return (
         <div style={{ backgroundColor: "black", color: "white", minHeight: "100vh" }}>
             <Navigation />
@@ -28,14 +36,14 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
                 </h1>
             </div>
 
-            <div className="relative z-0 space-x-4 flex flex-row items-center">
+            <div className="relative z-0 flex items-center justify-center space-x-4">
                 {videos.map((video) => (
-                    <div key={video.src} className="video-container relative w-1/4 h-auto">
-                        <video className="object-cover" autoPlay muted loop>
+                    <div key={video.src} className={`video-container relative ${widthClass} h-auto`}>
+                        <video className="object-cover w-full" autoPlay muted loop>
                             <source src={`${source}/${video.src}`} type="video/mp4" />
                         </video>
                         {video.legende ? (
-                            <div className="caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-2 text-right text-3xl opacity-0 transition-opacity duration-300"
+                            <div className="p-8 caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-2 text-right text-3xl opacity-0 transition-opacity duration-300"
                                 style={{ fontFamily: "Futura" }}
                             >
                                 {video.legende}

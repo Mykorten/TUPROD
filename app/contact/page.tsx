@@ -8,26 +8,26 @@ const socials = [
 		icon: <Instagram size={20} />,
 		href: "https://www.instagram.com/theunproductiveproduction?igsh=MXZncnFpcmV5bXZrZA==",
 		label: "Instagram",
-		handle: "theunprodproduction",
+		handle: "THEUNPRODPRODUCTION",
 	},
 	{
 		icon: <Youtube size={20} />,
 		href: "https://patreon.com/TheUnproductiveProduction?utm_medium=unknown&utm_source=join_link&utm_campaign=creatorshare_creator&utm_content=copyLink",
 		label: "Patreon",
-		handle: "TuProd",
+		handle: "TUPROD",
 	},
 	{
 		icon: <Mail size={16} />,
 		href: "mailto:theunprodproduction@gmail.com",
 		label: "Mail",
-		handle: "Email",
+		handle: "NOTRE EMAIL",
 	},
 ];
 
 export default function Example() {
 	return (
 		<div className="bg-black from-zinc-900/0 via-zinc-900 to-zinc-900/0"
-			style={{ fontFamily: "Phonk" }}
+
 		>
 			<Navigation />
 			<div className="container flex items-center justify-center min-h-screen px-4 mx-auto">
@@ -47,10 +47,12 @@ export default function Example() {
 								{s.icon}
 							</span>
 							<div className="z-10 flex flex-col items-center">
-								<span className="lg:text-xl font-medium duration-150 xl:text-xl text-zinc-200 group-hover:text-white ">
+								<span className="lg:text-xl font-medium duration-150 xl:text-2xl text-zinc-200 group-hover:text-white "
+									style={{ fontFamily: "Phonk" }}>
 									{s.handle}
 								</span>
 								<span className="mt-4 text-sm text-center duration-1000 text-zinc-400 group-hover:text-zinc-200"
+									style={{ fontFamily: "Futura" }}
 								>
 									{s.label}
 								</span>

@@ -3,11 +3,11 @@ import React from "react";
 import { ProjectLayout } from "../components/project-layout";
 import { Footer } from "@/app/components/footer";
 
-const previoustitle = "Documentaires";
+const previoustitle = "DOCUMENTAIRES";
 const nextVisible = false;
 const previousVisible = true;
 
-const title = "Publicités";
+const title = "PUBLICITES";
 const videos = [
     { src: "black-outFINAL.mov", legende: "Une publicité captivante" },
     { src: "OSTUFFFINFIN.mp4", legende: "Une autre publicité impressionnante" },

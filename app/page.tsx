@@ -4,8 +4,8 @@ import Link from "next/link";
 import React from "react";
 
 const navigation = [
-  { name: "Notre travail", href: "/montravail/artsculinaires" },
-  { name: "Contact", href: "/contact" },
+  { name: "NOTRE TRAVAIL", href: "/montravail/artsculinaires" },
+  { name: "CONTACT", href: "/contact" },
 ];
 
 const words = [
