@@ -117,14 +117,29 @@ export default function Home() {
               </h1>
 
               {hoveredTitle === item.name && videoSrc && (
-                <video
-                  className="fixed top-0 snap-center left-1/2 transform -translate-x-1/2  w-full h-auto min-h-screen  z-0"
-                  src={videoSrc}
-                  autoPlay
-                  muted
-                ></video>
-              )}
+                <motion.div
+                  className="fixed top-0 left-0 snap-center w-full h-auto min-h-screen z-0"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{
+                    duration: 0.3,
+                    ease: [0, 0.71, 0.2, 1.01],
+                    scale: {
+                      type: "spring",
+                      damping: 5,
+                      stiffness: 100,
+                      restDelta: 0.001
+                    }
+                  }} >
+                  <video
+                    className=""
+                    src={videoSrc}
+                    autoPlay
+                    muted
+                  ></video>
+                </motion.div>
 
+              )}
             </div>
           </Link>
         ))}

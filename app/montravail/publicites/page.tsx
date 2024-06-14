@@ -12,27 +12,30 @@ const previousVisible = true;
 const title = "PUBLICITES";
 const videos = [
     { src: "black-outFINAL.mov", legende: "BLACKOUT CONCEPT" },
-    { src: "OSTUFFFINFIN.mp4", legende: "NOUVELLE COLLECTION OSTUFF" },
 ];
 
 export default function ProjectsPage() {
     return (
         <div>
             <ProjectLayout title={title} source="/montravail/publicites" videos={videos} />
+            <div className="relative z-0 space-x-4 flex flex-row items-center bg-black">
+                <div className="video-container relative h-auto">
+                    <video className="object-cover" autoPlay muted loop>
+                        <source src="/montravail/publicites/OSTUFFFINFIN.mp4" type="video/mp4" />
+                    </video>
+
+                    <div className="caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-16 text-right text-3xl opacity-0 transition-opacity duration-300"
+                        style={{ fontFamily: "Futura" }}
+                    >
+                        NOUVELLE COLLECTION OSTUFF
+                    </div>
+                </div>
+            </div>
             <Footer previoustitle={previoustitle} nexttitle="" nextLink="" previousLink="/montravail/documentaires" nextVisible={nextVisible} previousVisible={previousVisible} />
 
             <style jsx>{`
                 .video-container {
                     position: relative;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: 100%;
-                }
-                .video-container video {
-                    width: 100%;
-                    height: auto;
-                    max-height: 100px;
                 }
                 .video-container:hover video {
                     filter: blur(5px);
