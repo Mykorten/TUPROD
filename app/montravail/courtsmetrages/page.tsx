@@ -10,7 +10,7 @@ const previousVisible = true;
 
 const title = "COURTS METRAGES";
 const videos = [
-    { src: "HumainVF.mov", legende: "Un court métrage captivant" },
+    { src: "HumainVF.mov", legende: "HUMAIN" },
 ];
 
 export default function ProjectsPage() {

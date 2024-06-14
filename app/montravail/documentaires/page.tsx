@@ -10,7 +10,7 @@ const previousVisible = true;
 
 const title = "DOCUMENTAIRES";
 const videos = [
-    { src: "jbmoreno.mov", legende: "Une série de documentaires fascinante" },
+    { src: "jbmoreno.mov", legende: "ARTISTES" },
 ];
 
 export default function ProjectsPage() {

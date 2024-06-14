@@ -1,6 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=AnotherFont:wght@400;700&display=swap');
+
 
 @layer base {
   .text-edge-outline {
@@ -16,4 +18,37 @@
 @font-face {
   font-family: "Futura";
   src: url("./public/fonts/Futura-PT/FuturaPTMedium.otf");
+}
+@font-face {
+  font-family: "Bellibish";
+  src: url("./public/fonts/Bellibish-Regular-BF664bb827d0346.ttf");
+}
+
+body {
+  font-family: 'Phonk';
+}
+
+@-webkit-keyframes drawIn {
+  0% {
+    stroke: transparent;
+    stroke-dashoffset: 10000;
+  }
+  75% {
+    stroke: white;
+  }
+}
+@keyframes drawIn {
+  0% {
+    stroke: transparent;
+    stroke-dashoffset: 10000;
+  }
+  75% {
+    stroke: white;
+  }
+}
+.mask-path {
+  stroke: white;
+  stroke-dasharray: 10000;
+  -webkit-animation: drawIn 2.5s 1s ease-in both;
+          animation: drawIn 2.5s 1s ease-in both;
 }

@@ -43,7 +43,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
                             <source src={`${source}/${video.src}`} type="video/mp4" />
                         </video>
                         {video.legende ? (
-                            <div className="p-8 caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-2 text-right text-3xl opacity-0 transition-opacity duration-300"
+                            <div className="p-8 caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-2 text-right text-2xl opacity-0 transition-opacity duration-300"
                                 style={{ fontFamily: "Futura" }}
                             >
                                 {video.legende}

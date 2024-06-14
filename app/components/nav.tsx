@@ -1,51 +1,48 @@
-"use client";  // Ajoutez cette ligne
+"use client";
 
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
-import { ArrowLeft } from "lucide-react";
 
 export const Navigation: React.FC = () => {
 	const ref = useRef<HTMLElement>(null);
-	const [isIntersecting, setIntersecting] = useState(true);
+	const [currentPath, setCurrentPath] = useState<string>("");
 
 	useEffect(() => {
-		if (!ref.current) return;
-		const observer = new IntersectionObserver(([entry]) =>
-			setIntersecting(entry.isIntersecting),
-		);
-
-		observer.observe(ref.current);
-		return () => observer.disconnect();
+		if (typeof window !== "undefined") {
+			setCurrentPath(window.location.pathname);
+		}
 	}, []);
 
 	return (
 		<header ref={ref}>
-			<div
-				className={`fixed inset-x-0 top-0 z-50 backdrop-blur duration-200 border-b ${isIntersecting
-					? "bg-zinc-900/0 border-transparent"
-					: "bg-zinc-900/500 border-zinc-800"
-					}`}
-			>
-				<div className="w-screen flex items-center justify-between fixed top-0 px-24 h-24 mx-auto">
+			<div className="fixed inset-x-0 top-0 z-50 bg-black">
+				<div className="w-screen flex items-center justify-between px-24 h-24 mx-auto">
 					<Link href="/">
 						<img className="w-36 cursor-pointer" src="/logo.png" alt="Logo" />
 					</Link>
 					<nav className="animate-fade-in">
 						<ul className="flex items-center justify-center gap-8">
-							<Link
-								href="/montravail/artsculinaires"
-								className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
-								style={{ fontSize: "1.15rem", fontFamily: "Phonk" }}
-							>
-								NOTRE TRAVAIL
-							</Link>
-							<Link
-								href="/contact"
-								className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
-								style={{ fontSize: "1.15rem", fontFamily: "Phonk" }}
-							>
-								CONTACT
-							</Link>
+							{currentPath !== "/montravail/artsculinaires" &&
+								currentPath !== "/montravail/courtsmetrages" &&
+								currentPath !== "/montravail/publicites" &&
+								currentPath !== "/montravail/documentaires" && (
+									<Link
+										href="/montravail/artsculinaires"
+										className="text-sm duration-100 text-zinc-300 hover:text-zinc-100"
+										style={{ fontSize: "1.15rem", fontFamily: "Phonk", opacity: 0.6 }}
+									>
+										NOTRE TRAVAIL
+									</Link>
+								)}
+							{currentPath !== "/contact" && (
+								<Link
+									href="/contact"
+									className="text-sm duration-100 text-zinc-300 hover:text-zinc-100"
+									style={{ fontSize: "1.15rem", fontFamily: "Phonk", opacity: 0.6 }}
+								>
+									CONTACT
+								</Link>
+							)}
 						</ul>
 					</nav>
 				</div>

@@ -10,10 +10,10 @@ const previousVisible = false;
 
 const title = "ARTS CULINAIRES";
 const videos = [
-    { src: "JAFARWOK.mp4", legende: "Legende art" },
-    { src: "JAFARBOEUF1.m4v", legende: "Viande marinée" },
-    { src: "JAFARBOEUF2.m4v", legende: "La cuisine" },
-    { src: "JAFARVELOUTE.m4v", legende: "Bien manger" },
+    { src: "JAFARWOK.mp4", legende: "LE WOK EXPRESS" },
+    { src: "JAFARBOEUF1.m4v", legende: "COTE DE BOEUF DE GALLICE" },
+    { src: "JAFARBOEUF2.m4v", legende: "ENTRECOTE DE BOEUF DE GALLICE" },
+    { src: "JAFARVELOUTE.m4v", legende: "VELOUTE DE COURGE" },
 ];
 
 export default function ProjectsPage() {
@@ -27,10 +27,10 @@ export default function ProjectsPage() {
                         <source src="/montravail/artsculinaires/PUBADRIEN.mp4" type="video/mp4" />
                     </video>
 
-                    <div className="caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-2 text-right text-3xl opacity-0 transition-opacity duration-300"
+                    <div className="caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-16 text-right text-3xl opacity-0 transition-opacity duration-300"
                         style={{ fontFamily: "Futura" }}
                     >
-                        Pub culinaire Adrien
+                        PRESENTATION DE FORMATION DE PATISSERIE POUR ADRIEN TORNIER
                     </div>
                 </div>
             </div>

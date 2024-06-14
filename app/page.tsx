@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 const navigation = [
   { name: "NOTRE TRAVAIL", href: "/montravail/artsculinaires" },
@@ -9,22 +10,59 @@ const navigation = [
 ];
 
 const words = [
-  { name: "ARTS CULINAIRES", href: "/montravail/artsculinaires" },
-  { name: "COURTS METRAGES", href: "/montravail/courtsmetrages" },
-  { name: "DOCUMENTAIRES", href: "/montravail/documentaires" },
-  { name: "PUBLICITES", href: "/montravail/publicites" },
+  { name: "ARTS CULINAIRES", href: "/montravail/artsculinaires", videoSrc: "/montravail/artsculinaires/PUBADRIEN.mp4" },
+  { name: "DOCUMENTAIRES", href: "/montravail/documentaires", videoSrc: "/montravail/documentaires/jbmoreno.mov" },
+  { name: "COURTS METRAGES", href: "/montravail/courtsmetrages", videoSrc: "/montravail/courtsmetrages/HumainVF.mov" },
+  { name: "PUBLICITES", href: "/montravail/publicites", videoSrc: "/montravail/publicites/black-outFINAL.mov" },
 ];
 
 export default function Home() {
+  const [hoveredTitle, setHoveredTitle] = useState<string | null>(null);
+  const [videoSrc, setVideoSrc] = useState<string | null>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const videoElement = document.getElementById("background-video");
+      if (videoElement) {
+        videoElement.style.transform = `translateY(${scrollPosition * 0.5}px)`;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="flex flex-col items-center justify-center w-screen min-h-screen overflow-hidden bg-black from-black via-zinc-600/20 to-black relative">
+    <div className="flex flex-col items-center justify-center w-screen min-h-screen overflow-hidden bg-black relative">
       <style jsx global>{`
         body {
           font-family: 'Phonk';
         }
+        @keyframes drawIn {
+          0% {
+            stroke-dashoffset: 10000;
+            fill: transparent;
+          }
+          75% {
+            stroke-dashoffset: 0;
+            fill: transparent;
+          }
+          100% {
+            fill: white;
+          }
+        }
+        .mask-path {
+          stroke: white;
+          stroke-dasharray: 10000;
+          animation: drawIn 2.5s ease forwards;
+        }
       `}</style>
 
-      <header className="w-screen flex items-center justify-between fixed top-0 px-24 h-24">
+      <header className="w-screen flex items-center justify-between fixed top-0 px-24 h-24 bg-black z-50">
         <Link href="/">
           <img className="w-36 cursor-pointer" src="/logo.png" alt="Logo" />
         </Link>
@@ -46,39 +84,54 @@ export default function Home() {
         </nav>
       </header>
 
-      <div className="z-10 flex flex-col items-center justify-center mt-72 space-y-60 mb-16">
+
+      <div className="flex flex-col items-center justify-center mt-48 space-y-60 mb-16">
         {words.map((item) => (
           <Link key={item.href} href={item.href}>
-            <div className="relative">
+            <div
+              className="relative"
+              onMouseEnter={() => {
+                setHoveredTitle(item.name);
+                setVideoSrc(item.videoSrc);
+              }}
+              onMouseLeave={() => {
+                setHoveredTitle(null);
+                setVideoSrc(null);
+              }}
+            >
               <h1
-                className="text-4xl text-gray-200 duration-500 font-display sm:text-6xl md:text-7xl hover:text-gray-300 relative"
-                style={{ fontFamily: "Phonk, sans-serif" }}
+                className="text-4xl text-gray-200 duration-500 font-display sm:text-6xl md:text-7xl hover:text-gray-300 relative z-10"
+                style={{ fontFamily: "Phonk" }}
               >
                 {item.name}
-                <span
-                  className="absolute top-0 left-0 w-full h-full text-6xl text-gray-700 opacity-20"
-                  style={{ fontFamily: "Phonk, sans-serif", zIndex: -1 }}
-                >
-                  artiste
-                </span>
+                {item.name === "DOCUMENTAIRES" && (
+                  <span
+                    className="absolute left-1/2 transform -translate-x-1/2 bottom-[-3rem] text-[6rem] text-gray-700 opacity-100"
+                    style={{ fontFamily: "Bellibish", zIndex: -1 }}
+                  >
+                    <svg width="500" height="100">
+                      <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontFamily="Bellibish" fontSize="6rem" fill="none" stroke="white" className="mask-path">ARTISTES</text>
+                    </svg>
+                  </span>
+                )}
               </h1>
+
+              {hoveredTitle === item.name && videoSrc && (
+                <video
+                  className="fixed top-0 snap-center left-1/2 transform -translate-x-1/2  w-full h-auto min-h-screen  z-0"
+                  src={videoSrc}
+                  autoPlay
+                  muted
+                ></video>
+              )}
+
             </div>
           </Link>
         ))}
       </div>
 
-      <footer className="w-screen flex items-center justify-between px-24 h-24 bg-black text-zinc-500">
-        <h2 className="text-sm" style={{ fontSize: "1.15rem", fontFamily: "Phonk, sans-serif" }}>
-          The Productive production
-        </h2>
-        <Link
-          href="/contact"
-          className="text-sm duration-500 hover:text-zinc-300"
-          style={{ fontSize: "1.15rem", fontFamily: "Phonk, sans-serif" }}
-        >
-          Contactez nous
-        </Link>
-      </footer>
+      <div className="w-screen flex items-center justify-between px-24 h-24 bg-black text-zinc-500">
+      </div>
     </div>
   );
 }
