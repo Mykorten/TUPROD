@@ -34,12 +34,7 @@ export const Footer: React.FC<FooterProps> = ({ previoustitle, previousLink, nex
                 </div>
 
                 <div className="w-screen flex flex-col items-center justify-center px-24 h-24 bg-black text-zinc-500">
-                    <Link href="/contact" className="text-sm duration-500 hover:text-zinc-300 mt-2" style={{ fontSize: "1.15rem", fontFamily: "Phonk" }}>
-                        Contactez nous
-                    </Link>
-                    <Link href="https://www.instagram.com/theunproductiveproduction?igshid=MXZncnFpcmV5bXZrZA==" className="text-sm duration-500 hover:text-zinc-300 mt-2" style={{ fontSize: "1.15rem", fontFamily: "Phonk" }}>
-                        theunproductiveproduction
-                    </Link>
+
                 </div>
             </div>
         </footer>

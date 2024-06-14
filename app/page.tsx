@@ -109,35 +109,20 @@ export default function Home() {
                     className="absolute left-1/2 transform -translate-x-1/2 bottom-[-3rem] text-[6rem] text-gray-700 opacity-100"
                     style={{ fontFamily: "Bellibish", zIndex: -1 }}
                   >
-                    <svg width="500" height="100">
-                      <text x="50%" y="50%" dominantBaseline="middle" textAnchor="middle" fontFamily="Bellibish" fontSize="6rem" fill="none" stroke="white" className="mask-path">ARTISTES</text>
-                    </svg>
+
                   </span>
                 )}
               </h1>
 
               {hoveredTitle === item.name && videoSrc && (
-                <motion.div
-                  className="fixed top-0 left-0 snap-center w-full h-auto min-h-screen z-0"
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{
-                    duration: 0.3,
-                    ease: [0, 0.71, 0.2, 1.01],
-                    scale: {
-                      type: "spring",
-                      damping: 5,
-                      stiffness: 100,
-                      restDelta: 0.001
-                    }
-                  }} >
-                  <video
-                    className=""
-                    src={videoSrc}
-                    autoPlay
-                    muted
-                  ></video>
-                </motion.div>
+
+                <video
+                  className="fixed top-0 left-0 snap-center w-full h-auto min-h-screen z-0 opacity-50"
+                  src={videoSrc}
+                  autoPlay
+                  muted
+                ></video>
+
 
               )}
             </div>
