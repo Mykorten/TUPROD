@@ -62,7 +62,7 @@ export default function Home() {
         }
       `}</style>
 
-      <header className="w-screen flex items-center justify-between fixed top-0 px-24 h-24 bg-black z-50">
+      <header className="w-screen flex items-center justify-between fixed top-0 px-24 h-24 bg-black-alpha backdrop-blur-2xl z-50">
         <Link href="/">
           <img className="w-36 cursor-pointer" src="/logo.png" alt="Logo" />
         </Link>
@@ -117,7 +117,7 @@ export default function Home() {
               {hoveredTitle === item.name && videoSrc && (
 
                 <video
-                  className="fixed top-0 left-0 snap-center w-full h-auto min-h-screen z-0 opacity-50"
+                  className="fixed top-0 left-0 snap-center w-full h-auto min-h-screen z-0 opacity-50 fade-in"
                   src={videoSrc}
                   autoPlay
                   muted

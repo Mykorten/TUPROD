@@ -102,6 +102,9 @@ module.exports = {
 					},
 				},
 			},
+			colors: {
+				"black-alpha": "#000000CC"
+			}
 		},
 	},
 	plugins: [

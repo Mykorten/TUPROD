@@ -1,7 +1,7 @@
 "use client";
 
 import { Navigation } from "@/app/components/nav";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 interface Video {
     src: string;
@@ -15,6 +15,9 @@ interface ProjectLayoutProps {
 }
 
 export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, videos }) => {
+    const [allVideosLoaded, setAllVideosLoaded] = useState(false);
+    const [videosLoadedCount, setVideosLoadedCount] = useState(0);
+
     // Calculate the width class based on the number of videos
     const getWidthClass = (numVideos: number) => {
         if (numVideos === 1) return "w-full";
@@ -22,6 +25,24 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
     };
 
     const widthClass = getWidthClass(videos.length);
+    useEffect(() => {
+        const timeOut = setTimeout(() => {
+            setAllVideosLoaded(videosLoadedCount === videos.length);
+        }, 500);
+        return () => clearTimeout(timeOut);
+    }, [videosLoadedCount, videos])
+
+    useEffect(() => {
+        const videoElements: HTMLCollectionOf<HTMLMediaElement> = document.getElementsByClassName("project-layout-video") as HTMLCollectionOf<HTMLMediaElement>;
+        [...videoElements].forEach((video: HTMLMediaElement) => {
+            video.onloadeddata = (event => {
+                console.log("videosCharges", event);
+                setVideosLoadedCount(count => count + 1);
+            });
+            video.load();
+        })
+    }, [videos])
+
 
     return (
         <div style={{ backgroundColor: "black", color: "white", minHeight: "100vh" }}>
@@ -39,7 +60,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
             <div className="relative z-0 flex items-center justify-center space-x-4">
                 {videos.map((video) => (
                     <div key={video.src} className={`video-container relative ${widthClass} h-auto`}>
-                        <video className="object-cover w-full" autoPlay muted loop>
+                        <video className={`object-cover w-full project-layout-video ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition`} autoPlay muted loop >
                             <source src={`${source}/${video.src}`} type="video/mp4" />
                         </video>
                         {video.legende ? (
