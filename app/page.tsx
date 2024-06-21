@@ -89,7 +89,7 @@ export default function Home() {
         {words.map((item) => (
           <Link key={item.href} href={item.href}>
             <div
-              className="relative"
+              className="relative video-container"
               onMouseEnter={() => {
                 setHoveredTitle(item.name);
                 setVideoSrc(item.videoSrc);
@@ -129,6 +129,13 @@ export default function Home() {
           </Link>
         ))}
       </div>
+      <style jsx>{`
+                
+                .video-container video {
+                    filter: blur(5px);
+                }
+                
+            `}</style>
 
       <div className="w-screen flex items-center justify-between px-24 h-24 bg-black text-zinc-500">
       </div>
