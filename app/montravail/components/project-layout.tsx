@@ -1,10 +1,12 @@
 "use client";
 
 import { Navigation } from "@/app/components/nav";
+import { CLOUD_SOURCE } from "@/app/constants/video-source";
 import React, { useEffect, useState } from "react";
 
 interface Video {
     src: string;
+    cloudSrc?: string;
     legende?: string;
 }
 
@@ -58,20 +60,22 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
             </div>
 
             <div className="relative z-0 flex items-center justify-center space-x-4">
-                {videos.map((video) => (
-                    <div key={video.src} className={`video-container relative ${widthClass} h-auto`}>
-                        <video className={`object-cover w-full project-layout-video ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition`} autoPlay muted loop >
-                            <source src={`${source}/${video.src}`} type="video/mp4" />
-                        </video>
-                        {video.legende ? (
-                            <div className="p-8 caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-2 text-right text-2xl opacity-0 transition-opacity duration-300"
-                                style={{ fontFamily: "Futura" }}
-                            >
-                                {video.legende}
-                            </div>
-                        ) : null}
-                    </div>
-                ))}
+                {videos.map((video) => {
+                    return (
+                        <div key={video.src} className={`video-container relative ${widthClass} h-auto`}>
+                            <video className={`object-cover w-full project-layout-video ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition`} autoPlay muted loop >
+                                <source src={`${source}/${video.src}`} type="video/mp4" />
+                            </video>
+                            {video.legende ? (
+                                <div className="p-8 caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-2 text-right text-2xl opacity-0 transition-opacity duration-300"
+                                    style={{ fontFamily: "Futura" }}
+                                >
+                                    {video.legende}
+                                </div>
+                            ) : null}
+                        </div>
+                    )
+                })}
             </div>
 
             <style jsx>{`

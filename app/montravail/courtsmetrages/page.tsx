@@ -2,6 +2,7 @@
 import React from "react";
 import { ProjectLayout } from "../components/project-layout";
 import { Footer } from "@/app/components/footer";
+import { CLOUD_SOURCE } from "@/app/constants/video-source";
 
 const previoustitle = "ARTS CULINAIRES";
 const nexttitle = "DOCUMENTAIRES";
@@ -16,9 +17,20 @@ const videos = [
 export default function ProjectsPage() {
     return (
         <div>
-            <ProjectLayout title={title} source="/montravail/courtsmetrages" videos={videos} />
+            <ProjectLayout
+                title={title}
+                source={CLOUD_SOURCE}
+                videos={videos}
+            />
 
-            <Footer previoustitle={previoustitle} previousLink="/montravail/artsculinaires" nexttitle={nexttitle} nextLink="/montravail/documentaires" nextVisible={nextVisible} previousVisible={previousVisible} />
+            <Footer
+                previoustitle={previoustitle}
+                previousLink="/montravail/artsculinaires"
+                nexttitle={nexttitle}
+                nextLink="/montravail/documentaires"
+                nextVisible={nextVisible}
+                previousVisible={previousVisible}
+            />
         </div>
     );
 }

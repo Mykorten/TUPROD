@@ -3,6 +3,7 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { CLOUD_SOURCE } from "./constants/video-source";
 
 const navigation = [
   { name: "NOTRE TRAVAIL", href: "/montravail/artsculinaires" },
@@ -10,10 +11,10 @@ const navigation = [
 ];
 
 const words = [
-  { name: "ARTS CULINAIRES", href: "/montravail/artsculinaires", videoSrc: "/montravail/artsculinaires/PUBADRIEN.mp4" },
-  { name: "DOCUMENTAIRES", href: "/montravail/documentaires", videoSrc: "/montravail/documentaires/jbmoreno.mov" },
-  { name: "COURTS METRAGES", href: "/montravail/courtsmetrages", videoSrc: "/montravail/courtsmetrages/HumainVF.mov" },
-  { name: "PUBLICITES", href: "/montravail/publicites", videoSrc: "/montravail/publicites/black-outFINAL.mov" },
+  { name: "ARTS CULINAIRES", href: "/montravail/artsculinaires", videoSrc: "PUBADRIEN.mp4" },
+  { name: "DOCUMENTAIRES", href: "/montravail/documentaires", videoSrc: "jbmoreno.mov" },
+  { name: "COURTS METRAGES", href: "/montravail/courtsmetrages", videoSrc: "HumainVF.mp4" },
+  { name: "PUBLICITES", href: "/montravail/publicites", videoSrc: "black-outFINAL.mp4" },
 ];
 
 export default function Home() {
@@ -100,7 +101,7 @@ export default function Home() {
               }}
             >
               <h1
-                className="text-4xl text-gray-200 duration-500 font-display sm:text-6xl md:text-7xl hover:text-gray-300 relative z-10"
+                className="text-4xl text-gray-200 duration-500 font-display sm:text-6xl md:text-7xl hover:text-gray-300 relative z-10 whitespace-nowrap"
                 style={{ fontFamily: "Phonk" }}
               >
                 {item.name}
@@ -118,7 +119,7 @@ export default function Home() {
 
                 <video
                   className="fixed top-0 left-0 snap-center w-full h-auto min-h-screen z-0 opacity-50 fade-in"
-                  src={videoSrc}
+                  src={`${CLOUD_SOURCE}/${videoSrc}`}
                   autoPlay
                   muted
                 ></video>

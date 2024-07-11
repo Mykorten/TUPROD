@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { ProjectLayout } from "../components/project-layout";
 import { Footer } from "@/app/components/footer";
+import { CLOUD_SOURCE } from "@/app/constants/video-source";
 
 const previoustitle = "DOCUMENTAIRES";
 const nextVisible = false;
@@ -17,11 +18,11 @@ const videos = [
 export default function ProjectsPage() {
     return (
         <div>
-            <ProjectLayout title={title} source="/montravail/publicites" videos={videos} />
+            <ProjectLayout title={title} source={CLOUD_SOURCE} videos={videos} />
             <div className="relative z-0 space-x-4 flex flex-row items-center bg-black">
                 <div className="video-container relative h-auto">
                     <video className="object-cover" autoPlay muted loop>
-                        <source src="/montravail/publicites/OSTUFFFINFIN.mp4" type="video/mp4" />
+                        <source src={`${CLOUD_SOURCE}/OSTUFFFINFIN.mp4`} type="video/mp4" />
                     </video>
 
                     <div className="caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-16 text-right text-3xl opacity-0 transition-opacity duration-300"

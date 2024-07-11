@@ -1,0 +1,1 @@
+export const CLOUD_SOURCE = 'https://tuprod.b-cdn.net';
