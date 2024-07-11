@@ -1,7 +1,6 @@
 "use client";
 
 import { Navigation } from "@/app/components/nav";
-import { CLOUD_SOURCE } from "@/app/constants/video-source";
 import React, { useEffect, useState } from "react";
 
 interface Video {
@@ -19,6 +18,7 @@ interface ProjectLayoutProps {
 export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, videos }) => {
     const [allVideosLoaded, setAllVideosLoaded] = useState(false);
     const [videosLoadedCount, setVideosLoadedCount] = useState(0);
+    const [hoveredTitle, setHoveredTitle] = useState<string | null>(null);
 
     // Calculate the width class based on the number of videos
     const getWidthClass = (numVideos: number) => {
@@ -61,15 +61,19 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
 
             <div className="relative z-0 flex items-center justify-center space-x-4">
                 {videos.map((video) => {
-                    console.log('project-layout, video', video);
                     return (
-                        <div key={video.src} className={`video-container relative ${widthClass} h-auto`}>
+                        <div    
+                            key={video.src} 
+                            className={`video-container relative ${widthClass} h-auto`}
+                            onMouseEnter={() => setHoveredTitle(video.src)}
+                            onMouseLeave={() => setHoveredTitle(null)}
+                        >
                             <video
-                                className={`object-cover w-full project-layout-video ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition`} 
+                                className={`object-cover w-full project-layout-video ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition ${hoveredTitle && hoveredTitle !== video.src ? 'blur-sm' : 'blur-none'}`} 
                                 src={`${source}/${video.src}`}
-                                autoPlay
-                                muted
+                                muted={hoveredTitle !== video.src}
                                 loop
+                                autoPlay
                             />
                             {video.legende ? (
                                 <div className="p-8 caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-2 text-right text-2xl opacity-0 transition-opacity duration-300"
@@ -86,9 +90,6 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
             <style jsx>{`
                 .video-container {
                     position: relative;
-                }
-                .video-container:hover video {
-                    filter: blur(5px);
                 }
                 .video-container:hover .caption {
                     opacity: 1;

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { ProjectLayout } from "../components/project-layout";
 import { Footer } from "@/app/components/footer";
 import { CLOUD_SOURCE } from "@/app/constants/video-source";
@@ -18,6 +18,8 @@ const videos = [
 ];
 
 export default function ProjectsPage() {
+    const [hovered, setHovered] = useState<boolean>();
+
     return (
         <div>
             <ProjectLayout
@@ -27,10 +29,18 @@ export default function ProjectsPage() {
             />
 
             <div className="relative z-0 space-x-4 flex flex-row items-center bg-black">
-                <div className="video-container container mx-auto relative  h-auto">
-                    <video className="object-cover" autoPlay muted loop>
-                        <source src={`${CLOUD_SOURCE}/PUBADRIEN.m4v`} type="video/m4v" />
-                    </video>
+                <div
+                    className="video-container container mx-auto relative  h-auto"
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                >
+                    <video
+                        className={`object-cover ${hovered ? 'blur-none' : 'blur-sm'}`}
+                        src={`${CLOUD_SOURCE}/PUBADRIEN.m4v`}
+                        autoPlay
+                        muted={!hovered}
+                        loop
+                    />
 
                     <div className="caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-16 text-right text-3xl opacity-0 transition-opacity duration-300"
                         style={{ fontFamily: "Futura" }}
@@ -42,9 +52,6 @@ export default function ProjectsPage() {
             <style jsx>{`
                 .video-container {
                     position: relative;
-                }
-                .video-container:hover video {
-                    filter: blur(5px);
                 }
                 .video-container:hover .caption {
                     opacity: 1;

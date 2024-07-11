@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { ProjectLayout } from "../components/project-layout";
 import { Footer } from "@/app/components/footer";
 import { CLOUD_SOURCE } from "@/app/constants/video-source";
@@ -16,6 +16,8 @@ const videos = [
 ];
 
 export default function ProjectsPage() {
+    const [hovered, setHovered] = useState<boolean>(false);
+
     return (
         <div className="bg-black">
             <ProjectLayout
@@ -24,12 +26,16 @@ export default function ProjectsPage() {
                 videos={videos}
             />
             <div className="relative z-0 space-x-4 flex flex-row items-center bg-black mb-16">
-                <div className="video-container relative h-auto">
+                <div
+                    className={`video-container relative h-auto ${!hovered ? 'blur-sm' : 'blur-none'}`}
+                    onMouseEnter={() => setHovered(true)}
+                    onMouseLeave={() => setHovered(false)}
+                >
                     <video
                         className="object-cover"
                         src={`${CLOUD_SOURCE}/OSTUFFFINFIN.m4v`}
                         autoPlay
-                        muted
+                        muted={!hovered}
                         loop 
                     />
 
@@ -52,9 +58,6 @@ export default function ProjectsPage() {
             <style jsx>{`
                 .video-container {
                     position: relative;
-                }
-                .video-container:hover video {
-                    filter: blur(5px);
                 }
                 .video-container:hover .caption {
                     opacity: 1;
