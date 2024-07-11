@@ -61,11 +61,16 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
 
             <div className="relative z-0 flex items-center justify-center space-x-4">
                 {videos.map((video) => {
+                    console.log('project-layout, video', video);
                     return (
                         <div key={video.src} className={`video-container relative ${widthClass} h-auto`}>
-                            <video className={`object-cover w-full project-layout-video ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition`} autoPlay muted loop >
-                                <source src={`${source}/${video.src}`} type="video/mp4" />
-                            </video>
+                            <video
+                                className={`object-cover w-full project-layout-video ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition`} 
+                                src={`${source}/${video.src}`}
+                                autoPlay
+                                muted
+                                loop
+                            />
                             {video.legende ? (
                                 <div className="p-8 caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-2 text-right text-2xl opacity-0 transition-opacity duration-300"
                                     style={{ fontFamily: "Futura" }}

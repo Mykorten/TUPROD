@@ -18,7 +18,7 @@ export const Footer: React.FC<FooterProps> = ({ previoustitle, previousLink, nex
                 <div className="bottom-24 left-0 right-0 flex justify-between px-24">
                     {previousVisible && (
                         <div className="bg-black p-2 flex items-center">
-                            <Link href={previousLink} className="text-sm duration-500 hover:text-zinc-300 flex items-center" style={{ fontSize: "2.15rem", fontFamily: "Phonk" }}>
+                            <Link href={previousLink} className="text-sm duration-500 hover:text-zinc-300 flex items-center leading-8" style={{ fontSize: "2.15rem", fontFamily: "Phonk" }}>
                                 <ChevronLeft size={50} /> {previoustitle}
                             </Link>
                         </div>
@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ previoustitle, previousLink, nex
                     <div className="flex-grow"></div>
                     {nextVisible && (
                         <div className="bg-black p-2 rounded-md flex items-center">
-                            <Link href={nextLink} className="text-sm duration-500 hover:text-zinc-300 flex items-center" style={{ fontSize: "2.15rem", fontFamily: "Phonk" }}>
+                            <Link href={nextLink} className="text-sm duration-500 hover:text-zinc-300 flex items-center leading-8" style={{ fontSize: "2.15rem", fontFamily: "Phonk" }}>
                                 {nexttitle} <ChevronRight size={50} />
                             </Link>
                         </div>

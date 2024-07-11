@@ -11,7 +11,7 @@ const previousVisible = true;
 
 const title = "DOCUMENTAIRES";
 const videos = [
-    { src: "jbmoreno.mov", legende: "ARTISTES" },
+    { src: "jbmoreno.m4v", legende: "ARTISTES" },
 ];
 
 export default function ProjectsPage() {

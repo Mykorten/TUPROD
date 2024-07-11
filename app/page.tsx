@@ -11,10 +11,10 @@ const navigation = [
 ];
 
 const words = [
-  { name: "ARTS CULINAIRES", href: "/montravail/artsculinaires", videoSrc: "PUBADRIEN.mp4" },
-  { name: "DOCUMENTAIRES", href: "/montravail/documentaires", videoSrc: "jbmoreno.mov" },
-  { name: "COURTS METRAGES", href: "/montravail/courtsmetrages", videoSrc: "HumainVF.mp4" },
-  { name: "PUBLICITES", href: "/montravail/publicites", videoSrc: "black-outFINAL.mp4" },
+  { name: "ARTS CULINAIRES", href: "/montravail/artsculinaires", videoSrc: "PUBADRIEN.m4v" },
+  { name: "DOCUMENTAIRES", href: "/montravail/documentaires", videoSrc: "jbmoreno.m4v" },
+  { name: "COURTS METRAGES", href: "/montravail/courtsmetrages", videoSrc: "HumainVF.m4v" },
+  { name: "PUBLICITES", href: "/montravail/publicites", videoSrc: "black-outFINAL.m4v" },
 ];
 
 export default function Home() {

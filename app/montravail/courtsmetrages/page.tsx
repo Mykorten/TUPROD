@@ -11,7 +11,7 @@ const previousVisible = true;
 
 const title = "COURTS METRAGES";
 const videos = [
-    { src: "HumainVF.mov", legende: "HUMAIN" },
+    { src: "HumainVF.m4v", legende: "HUMAIN" },
 ];
 
 export default function ProjectsPage() {
