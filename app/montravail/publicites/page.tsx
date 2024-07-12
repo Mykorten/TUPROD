@@ -25,9 +25,9 @@ export default function ProjectsPage() {
                 source={CLOUD_SOURCE}
                 videos={videos}
             />
-            <div className="relative z-0 space-x-4 flex flex-row items-center bg-black mb-16">
+            <div className="relative z-0 space-x-4 flex flex-row items-center bg-black mb-16 w-full">
                 <div
-                    className={`video-container relative h-auto ${!hovered ? 'blur-sm' : 'blur-none'}`}
+                    className={`video-container relative h-auto w-full ${!hovered ? 'blur-sm' : 'blur-none'}`}
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}
                 >
