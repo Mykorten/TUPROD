@@ -32,7 +32,7 @@ export default function ProjectsPage() {
                     onMouseLeave={() => setHovered(false)}
                 >
                     <video
-                        className="object-cover"
+                        className="object-cover w-full"
                         src={`${CLOUD_SOURCE}/OSTUFFFINFIN.m4v`}
                         autoPlay
                         muted={!hovered}

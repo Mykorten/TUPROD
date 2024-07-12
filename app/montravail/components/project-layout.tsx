@@ -69,7 +69,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
                             onMouseLeave={() => setHoveredTitle(null)}
                         >
                             <video
-                                className={`object-cover animate-fade-in w-full project-layout-video ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition duration-500 ${hoveredTitle && hoveredTitle !== video.src ? 'blur-sm' : 'blur-none'}`} 
+                                className={`object-cover w-full project-layout-video ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition duration-500 ${hoveredTitle && hoveredTitle !== video.src ? 'blur-sm' : 'blur-none'}`} 
                                 src={`${source}/${video.src}`}
                                 muted={hoveredTitle !== video.src}
                                 loop
