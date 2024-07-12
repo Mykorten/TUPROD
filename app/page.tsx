@@ -118,7 +118,7 @@ export default function Home() {
               {hoveredTitle === item.name && videoSrc && (
 
                 <video
-                  className="fixed top-0 left-0 snap-center w-full h-auto min-h-screen z-0 opacity-50 fade-in"
+                  className="fixed top-0 left-0 snap-center w-full h-auto min-h-screen z-0 opacity-50 animate-fade-in"
                   src={`${CLOUD_SOURCE}/${videoSrc}`}
                   autoPlay
                   muted
