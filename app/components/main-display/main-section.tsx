@@ -95,18 +95,20 @@ export function MainSection({ section, onVideoLoaded }: SectionProps) {
 				)}
 			</div>
 
-			<div className="flex relative md:hidden">
-				<video
-					className={`w-full h-[350px] z-0 opacity-50 animate-fade-in ${isVideoVisible ? 'blur-none' : 'blur-sm'} transition-all duration-300 object-cover`}
-					src={`${CLOUD_SOURCE}/${section.videoSrc}`}
-					playsInline
-					muted
-					loop
-					preload="auto"
-					ref={videoRef}
-				>
-					{section.name}
-				</video>
+			<div className={`flex relative md:hidden`} >
+				<div className={`w-full h-[350px] z-0 ${hasLoaded ? 'opacity-75' : 'opacity-0'} transition-all duration-500`}>
+					<video
+						className={`w-full h-full z-0 ${isVideoVisible ? 'blur-none' : 'blur-sm'} transition-all duration-300 object-cover`}
+						src={`${CLOUD_SOURCE}/${section.videoSrc}`}
+						playsInline
+						muted
+						loop
+						preload="auto"
+						ref={videoRef}
+					>
+						{section.name}
+					</video>
+				</div>
 
 				<div className="absolute inset-0 flex items-center justify-center">
 					<MainTitle title={section.name} /> 
