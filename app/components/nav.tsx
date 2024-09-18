@@ -84,7 +84,7 @@ export const Navigation: React.FC = () => {
 									<Link
 										href={item.href}
 										style={{ fontSize: "1.15rem", fontFamily: "Phonk, sans-serif" }}
-										className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
+										className="text-sm duration-500 text-zinc-200 hover:text-zinc-100"
 									>
 										{item.name}
 									</Link>
