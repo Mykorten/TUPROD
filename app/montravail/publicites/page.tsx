@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { ProjectLayout } from "../components/project-layout";
 import { Footer } from "@/app/components/footer";
 import { CLOUD_SOURCE } from "@/app/constants/video-source";
+import { useIsMobile } from "@/app/hooks/use-is-mobile";
 
 const previoustitle = "DOCUMENTAIRES";
 const nextVisible = false;
@@ -17,16 +18,28 @@ const videos = [
 
 export default function ProjectsPage() {
     const [hovered, setHovered] = useState<boolean>(false);
+    const isMobile = useIsMobile();
+    let displayVideos = videos;
+
+    if (isMobile) {
+        displayVideos = [
+            ...videos,
+            { src: "OSTUFFFINFIN.m4v", legende: "NOUVELLE COLLECTION OSTUFF" }
+        ];
+    }
 
     return (
-        <div className="bg-black">
+        <div className="bg-black min-h-screen flex flex-col justify-between">
             <ProjectLayout
                 title={title}
                 source={CLOUD_SOURCE}
-                videos={videos}
+                videos={displayVideos}
+                legendPlacement={isMobile ? "bottom" : "overlay"}
             />
-            <div className="relative z-0 space-x-4 flex flex-row items-center bg-black mb-16 w-full">
-                <div
+
+            {!isMobile && (
+                <div className="relative z-0 space-x-4 flex flex-row items-center bg-black mb-16 w-full">
+                    <div
                     className={`video-container relative h-auto w-full ${!hovered ? 'blur-sm' : 'blur-none'}`}
                     onMouseEnter={() => setHovered(true)}
                     onMouseLeave={() => setHovered(false)}
@@ -44,8 +57,9 @@ export default function ProjectsPage() {
                     >
                         NOUVELLE COLLECTION OSTUFF
                     </div>
+                    </div>
                 </div>
-            </div>
+            )}
             <Footer
                 previoustitle={previoustitle}
                 nexttitle=""

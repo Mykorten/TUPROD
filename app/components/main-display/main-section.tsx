@@ -21,9 +21,7 @@ export function MainSection({ section }: SectionProps) {
     };
 
     const observer = new IntersectionObserver((entries) => {
-			console.log("entries", entries);
       entries.forEach(entry => {
-				console.log("entry", entry);
         if (entry.isIntersecting) {
           setIsVideoVisible(true);
           videoRef.current?.play().catch(error => {

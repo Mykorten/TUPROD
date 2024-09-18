@@ -21,11 +21,12 @@ export default function ProjectsPage() {
     const [hovered, setHovered] = useState<boolean>();
 
     return (
-        <div>
+        <div className="bg-black">
             <ProjectLayout
                 title={title}
                 source={CLOUD_SOURCE}
                 videos={videos}
+                orientation="vertical"
             />
 
             <div className="relative z-0 space-x-4 flex flex-row items-center bg-black w-full mb-16">
@@ -42,7 +43,7 @@ export default function ProjectsPage() {
                         loop
                     />
 
-                    <div className="caption absolute bottom-0 left-0 backdrop-blur-sm right-0 bg-opacity-75 text-white p-16 text-right text-3xl opacity-0 transition-opacity duration-300"
+                    <div className="caption absolute bottom-0 left-0 backdrop-blur-sm right-0 bg-opacity-75 text-white p-4 md:p-16 text-right text-md md:text-3xl opacity-1 md:opacity-0 transition-opacity duration-300"
                         style={{ fontFamily: "Futura" }}
                     >
                         PRESENTATION DE FORMATION DE PATISSERIE POUR ADRIEN TORNIER

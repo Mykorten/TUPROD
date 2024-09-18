@@ -13,12 +13,12 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ previoustitle, previousLink, nexttitle, nextLink, previousVisible, nextVisible }) => {
     return (
-        <footer className=" bg-black relative text-zinc-100">
+        <footer className="bg-black relative text-zinc-100">
             <div className={`z-50  duration-200 border-t ${previousVisible || nextVisible ? "bg-zinc-900/0 border-transparent" : "bg-zinc-900/500 border-zinc-800"}`}>
-                <div className="bottom-24 left-0 right-0 flex justify-between px-24">
+                <div className="bottom-24 left-0 right-0 flex flex-col md:flex-row justify-between items-center px-2 md:px-24">
                     {previousVisible && (
                         <div className="bg-black p-2 flex items-center">
-                            <Link href={previousLink} className="text-sm duration-500 hover:text-zinc-300 flex items-center leading-8" style={{ fontSize: "2.15rem", fontFamily: "Phonk" }}>
+                            <Link href={previousLink} className={`${nextVisible ? 'text-lg' : 'text-2xl'} md:text-4xl duration-500 hover:text-zinc-300 flex items-center leading-8`} style={{ fontFamily: "Phonk" }}>
                                 <ChevronLeft size={50} /> {previoustitle}
                             </Link>
                         </div>
@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ previoustitle, previousLink, nex
                     <div className="flex-grow"></div>
                     {nextVisible && (
                         <div className="bg-black p-2 rounded-md flex items-center">
-                            <Link href={nextLink} className="text-sm duration-500 hover:text-zinc-300 flex items-center leading-8" style={{ fontSize: "2.15rem", fontFamily: "Phonk" }}>
+                            <Link href={nextLink} className={`${previousVisible ? 'text-lg' : 'text-2xl'} md:text-4xl duration-500 hover:text-zinc-300 flex items-center leading-8`} style={{ fontFamily: "Phonk" }}>
                                 {nexttitle} <ChevronRight size={50} />
                             </Link>
                         </div>

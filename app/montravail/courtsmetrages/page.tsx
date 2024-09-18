@@ -16,7 +16,7 @@ const videos = [
 
 export default function ProjectsPage() {
     return (
-        <div>
+        <div className="bg-black min-h-screen flex flex-col justify-between">
             <ProjectLayout
                 title={title}
                 source={CLOUD_SOURCE}
