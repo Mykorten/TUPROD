@@ -92,9 +92,14 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
             if (videoElement) {
                 const isActive = isMobile ? video.src === activeVideoSrc : video.src === hoveredVideoSrc;
                 videoElement.muted = !isActive;
-
+    
                 if (isActive) {
-                    videoElement.play().catch(error => console.error("Error playing video:", error));
+                    videoElement.play().catch(error => {
+                        console.error("Error playing video:", error);
+                        // Try to play unmuted if autoplay was blocked
+                        videoElement.muted = true;
+                        videoElement.play().catch(e => console.error("Error playing muted video:", e));
+                    });
                 } else {
                     videoElement.pause();
                 }
@@ -135,7 +140,12 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
                                 loop
                                 playsInline
                                 preload="auto"
-                                onLoadedData={() => setVideosLoadedCount(count => count + 1)}
+                                onLoadedData={() => {
+                                    setVideosLoadedCount(count => count + 1);
+                                    if (videoRefs.current[video.src]) {
+                                        videoRefs.current[video.src]!.play().catch(e => console.error("Error auto-playing video:", e));
+                                    }
+                                }}
                             />
                             {legendPlacement === "overlay" && video.legende ? (
                                 <div className="p-8 caption absolute bottom-0 left-0 right-0 bg-opacity-75 text-white p-2 text-right text-2xl opacity-100 md:opacity-0 transition-opacity duration-300"
