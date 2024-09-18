@@ -39,6 +39,7 @@ export default function ProjectsPage() {
                         className={`object-cover w-full ${hovered ? 'blur-none' : 'blur-sm'}`}
                         src={`${CLOUD_SOURCE}/PUBADRIEN.m4v`}
                         autoPlay
+                        playsInline
                         muted={!hovered}
                         loop
                     />

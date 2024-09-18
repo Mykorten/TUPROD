@@ -118,7 +118,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
         const container = containerRef.current;
         if (container) {
             const handleWheel = (e: WheelEvent) => {
-                if (window.innerWidth <= 768) {  // Mobile breakpoint
+                if (window.innerWidth <= MOBILE_BREAKPOINT) {  // Mobile breakpoint
                     e.preventDefault();
                     container.scrollLeft += e.deltaY;
                 }

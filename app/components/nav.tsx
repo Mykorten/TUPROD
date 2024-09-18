@@ -41,7 +41,7 @@ export const Navigation: React.FC = () => {
 							);
 						})}
 					</ul>
-					<button className="md:hidden text-white mx-8 md:mx-0" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+					<button className="md:hidden text-white mx-8 md:mx-0 w-10 h-10 flex items-center justify-end" onClick={() => setIsMenuOpen(!isMenuOpen)}>
 						<Menu />
 					</button>
 				</nav>
@@ -57,7 +57,7 @@ export const Navigation: React.FC = () => {
 						transition={{ duration: 0.1 }}
 						className="fixed top-0 left-0 w-screen h-screen bg-black-alpha-70 backdrop-blur-2xl z-50"
 					>
-					<button className="absolute top-8 right-1 md:right-0 mx-8 md:mx-0" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+					<button className="absolute top-8 right-1 md:right-0 mx-8 md:mx-0 w-10 h-10 flex items-center justify-end" onClick={() => setIsMenuOpen(!isMenuOpen)}>
 						<X className="text-white" />
 					</button>
 					<ul className="flex flex-col items-center justify-center h-full">
