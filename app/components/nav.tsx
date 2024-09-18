@@ -61,17 +61,23 @@ export const Navigation: React.FC = () => {
 						<X className="text-white" />
 					</button>
 					<ul className="flex flex-col items-center justify-center h-full">
-						{navigation.map((item) => (
-							<li key={item.href}>
-								<Link
-									href={item.href}
-									style={{ fontSize: "1.15rem", fontFamily: "Phonk, sans-serif" }}
-									className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
-								>
-									{item.name}
-								</Link>
-							</li>
-						))}
+						{navigation.map((item) => {
+							if (currentPath.includes(item.hiddenPath)) {
+								return null;
+							}
+
+							return (
+								<li key={item.href}>
+									<Link
+										href={item.href}
+										style={{ fontSize: "1.15rem", fontFamily: "Phonk, sans-serif" }}
+										className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
+									>
+										{item.name}
+									</Link>
+								</li>
+							)
+						})}
 					</ul>
 					</motion.div>
 				</AnimatePresence>
