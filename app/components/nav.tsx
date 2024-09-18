@@ -10,6 +10,15 @@ const navigation = [
   { name: "CONTACT", href: "/contact", hiddenPath: "contact" },
 ];
 
+const mobileNavigation = [
+	{ name: "NOTRE TRAVAIL", href: "/montravail/artsculinaires", hiddenPath: "montravail" },
+	{ name: "ARTS CULINAIRES", href: "/montravail/artsculinaires", hiddenPath: "contact", hiddenAbsolutePath: "/" },
+	{ name: "COURTS METRAGES", href: "/montravail/courtsmetrages", hiddenPath: "contact", hiddenAbsolutePath: "/" },
+	{ name: "DOCUMENTAIRES", href: "/montravail/documentaires", hiddenPath: "contact", hiddenAbsolutePath: "/" },
+	{ name: "PUBLICITES", href: "/montravail/publicites", hiddenPath: "contact", hiddenAbsolutePath: "/" },
+	{ name: "CONTACT", href: "/contact", hiddenPath: "contact" },
+]
+
 export const Navigation: React.FC = () => {
 	const ref = useRef<HTMLElement>(null);
 	const [currentPath, setCurrentPath] = useState<string>("");
@@ -61,8 +70,12 @@ export const Navigation: React.FC = () => {
 						<X className="text-white" />
 					</button>
 					<ul className="flex flex-col items-center justify-center h-full">
-						{navigation.map((item) => {
-							if (currentPath.includes(item.hiddenPath)) {
+						{mobileNavigation.map((item) => {
+							if (item.hiddenPath && currentPath.includes(item.hiddenPath)) {
+								return null;
+							}
+
+							if (currentPath === item.hiddenAbsolutePath) {
 								return null;
 							}
 

@@ -6,12 +6,14 @@ import { MainTitle } from "./main-title";
 
 interface SectionProps {
 	section: Section;
+	onVideoLoaded: () => void;
 }
 
-export function MainSection({ section }: SectionProps) {
+export function MainSection({ section, onVideoLoaded }: SectionProps) {
 	const [hoveredTitle, setHoveredTitle] = useState<string | null>(null);
 	const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoVisible, setIsVideoVisible] = useState(false);
+  const [hasLoaded, setHasLoaded] = useState(false);
 
 	useEffect(() => {
     const options = {
@@ -45,12 +47,34 @@ export function MainSection({ section }: SectionProps) {
     };
   }, []);
 
+	useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      const handleLoad = () => {
+				if (!hasLoaded) {
+					setHasLoaded(true);
+					onVideoLoaded();
+				}
+      };
+
+      video.addEventListener('loadeddata', handleLoad);
+
+      // Check if the video is already loaded
+      if (video.readyState >= 2) {
+        handleLoad();
+      }
+
+      return () => {
+        video.removeEventListener('loadeddata', handleLoad);
+      };
+    }
+  }, [onVideoLoaded]);
+
 	return (
 		<Link key={section.href} href={section.href}>
 			<div
 				className="hidden md:flex relative"
 				onMouseEnter={() => {
-					console.log("onMouseEnter", section.name, section.videoSrc);
 					setHoveredTitle(section.name);
 				}}
 				onMouseLeave={() => {

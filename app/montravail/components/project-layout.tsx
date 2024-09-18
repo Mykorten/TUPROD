@@ -108,7 +108,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
 
             <div className="flex flex-col items-center justify-center mt-32 mb-8 md:mb-16 px-8 relative z-10">
                 <h1
-                    className="text-4xl text-zinc-100 duration-500 font-display sm:text-6xl md:text-7xl"
+                    className="text-3xl text-zinc-100 duration-500 font-display sm:text-6xl md:text-7xl"
                     style={{ fontFamily: "Phonk" }}
                 >
                     {title}
