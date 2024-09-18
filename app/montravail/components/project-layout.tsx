@@ -108,7 +108,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
 
             <div className="flex flex-col items-center justify-center mt-32 mb-8 md:mb-16 px-8 relative z-10">
                 <h1
-                    className="text-3xl text-zinc-100 duration-500 font-display sm:text-6xl md:text-7xl"
+                    className={`text-3xl text-zinc-100 duration-500 font-display sm:text-6xl md:text-7xl ${!allVideosLoaded ? 'animate-pulse' : ''}`}
                     style={{ fontFamily: "Phonk" }}
                 >
                     {title}
@@ -119,13 +119,13 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
                 {videos.map((video) => {
                     return (
                         <div    
-                            key={video.src} 
-                            className={`video-container relative w-screen ${(isUniqueVideo || orientation === "horizontal") ? 'px-0' : 'px-16'} md:px-0 flex ${legendPlacement === "bottom" ? 'flex-col' : ''} flex-shrink-0 md:flex-shrink md:min-w-0 ${widthClass} h-auto`}
+                            key={video.src}
+                            className={`video-container relative w-screen min-h-[475px] ${(isUniqueVideo || orientation === "horizontal") ? 'px-0' : 'px-16'} md:px-0 flex ${legendPlacement === "bottom" ? 'flex-col' : ''} flex-shrink-0 md:flex-shrink md:min-w-0 ${widthClass} h-auto ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition duration-500`}
                             onMouseEnter={() => !isMobile && setHoveredVideoSrc(video.src)}
                             onMouseLeave={() => !isMobile && setHoveredVideoSrc(null)}
                         >
                             <video
-                                className={`object-cover w-full h-full project-layout-video ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition duration-500 ${
+                                className={`object-cover w-full h-full project-layout-video transition duration-500 ${
                                     isMobile ? (activeVideoSrc === video.src ? '' : 'blur-sm') : (hoveredVideoSrc === video.src ? '' : 'blur-sm')
                                 }`} 
                                 ref={(el) => videoRefs.current[video.src] = el}
