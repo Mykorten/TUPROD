@@ -28,7 +28,8 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
     const isMobile = useIsMobile();
     const containerRef = useRef<HTMLDivElement>(null);
     const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
-    const isUniqueVideo = videos.length === 1;
+    const isUniqueVideo = videos.length === 1;  
+    const lastScrollLeft = useRef(0);
 
     // Calculate the width class based on the number of videos
     const getWidthClass = (numVideos: number) => {
@@ -52,19 +53,6 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
         [...videoElements].forEach((video: HTMLMediaElement) => {
             video.load();
         });
-
-        const resetScrollPosition = () => {
-            if (window.innerWidth <= 640 && containerRef.current) {
-                containerRef.current.scrollLeft = 0;
-            }
-        };
-
-        resetScrollPosition();
-        window.addEventListener('resize', resetScrollPosition);
-
-        return () => {
-            window.removeEventListener('resize', resetScrollPosition);
-        };
     }, [videos]);
 
     useEffect(() => {
@@ -113,20 +101,6 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
             }
         });
     }, [activeVideoSrc, hoveredVideoSrc, videos, isMobile]);
-
-    useEffect(() => {
-        const container = containerRef.current;
-        if (container) {
-            const handleWheel = (e: WheelEvent) => {
-                if (window.innerWidth <= MOBILE_BREAKPOINT) {  // Mobile breakpoint
-                    e.preventDefault();
-                    container.scrollLeft += e.deltaY;
-                }
-            };
-            container.addEventListener('wheel', handleWheel, { passive: false });
-            return () => container.removeEventListener('wheel', handleWheel);
-        }
-    }, []);
 
     return (
         <div className="bg-black min-h-fit md:min-h-screen text-white mb-8">
