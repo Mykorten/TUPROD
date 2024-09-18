@@ -103,7 +103,17 @@ module.exports = {
 				},
 			},
 			colors: {
-				"black-alpha": "#000000CC"
+				"black-alpha": "#000000CC",
+				"black-alpha-10": "#00000010",
+				"black-alpha-20": "#00000030",
+				"black-alpha-30": "#00000040",
+				"black-alpha-40": "#00000060",
+				"black-alpha-50": "#00000080",
+				"black-alpha-60": "#00000090",
+				"black-alpha-70": "#000000A0",
+				"black-alpha-80": "#000000B0",
+				"black-alpha-90": "#000000C0",
+				"black-alpha-95": "#000000E0",
 			}
 		},
 	},

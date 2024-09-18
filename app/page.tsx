@@ -2,13 +2,11 @@
 
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
 import { CLOUD_SOURCE } from "./constants/video-source";
+import { Navigation } from "./components/nav";
+import { MainSection } from "./components/main-display/main-section";
+import { sections } from "./models/section";
 
-const navigation = [
-  { name: "NOTRE TRAVAIL", href: "/montravail/artsculinaires" },
-  { name: "CONTACT", href: "/contact" },
-];
 
 const words = [
   { name: "ARTS CULINAIRES", href: "/montravail/artsculinaires", videoSrc: "PUBADRIEN.m4v" },
@@ -63,82 +61,12 @@ export default function Home() {
         }
       `}</style>
 
-      <header className="w-screen flex items-center justify-between fixed top-0 px-24 h-24 bg-black-alpha backdrop-blur-2xl z-50">
-        <Link href="/">
-          <img className="w-36 cursor-pointer" src="/logo.png" alt="Logo" />
-        </Link>
+      <Navigation />
 
-        <nav className="my-16 animate-fade-in">
-          <ul className="flex items-center justify-center gap-8">
-            {navigation.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  style={{ fontSize: "1.15rem", fontFamily: "Phonk, sans-serif" }}
-                  className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
-                >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </header>
-
-
-      <div className="flex flex-col items-center justify-center mt-48 space-y-60 mb-16">
-        {words.map((item) => (
-          <Link key={item.href} href={item.href}>
-            <div
-              className="relative video-container"
-              onMouseEnter={() => {
-                setHoveredTitle(item.name);
-                setVideoSrc(item.videoSrc);
-              }}
-              onMouseLeave={() => {
-                setHoveredTitle(null);
-                setVideoSrc(null);
-              }}
-            >
-              <h1
-                className="text-4xl text-gray-200 duration-500 font-display sm:text-6xl md:text-7xl hover:text-gray-300 relative z-10 whitespace-nowrap"
-                style={{ fontFamily: "Phonk" }}
-              >
-                {item.name}
-                {item.name === "DOCUMENTAIRES" && (
-                  <span
-                    className="absolute left-1/2 transform -translate-x-1/2 bottom-[-3rem] text-[6rem] text-gray-700 opacity-100"
-                    style={{ fontFamily: "Bellibish", zIndex: -1 }}
-                  >
-
-                  </span>
-                )}
-              </h1>
-
-              {hoveredTitle === item.name && videoSrc && (
-
-                <video
-                  className="fixed top-0 left-0 snap-center w-full h-auto min-h-screen z-0 opacity-50 animate-fade-in"
-                  src={`${CLOUD_SOURCE}/${videoSrc}`}
-                  autoPlay
-                  muted
-                ></video>
-
-
-              )}
-            </div>
-          </Link>
+      <div className="flex flex-col items-center justify-center mt-48 space-y-8 md:space-y-60 mb-32">
+        {sections.map((section) => (
+          <MainSection key={section.href} section={section} />
         ))}
-      </div>
-      <style jsx>{`
-                
-                .video-container video {
-                    filter: blur(5px);
-                }
-                
-            `}</style>
-
-      <div className="w-screen flex items-center justify-between px-24 h-24 bg-black text-zinc-500">
       </div>
     </div>
   );

@@ -1,11 +1,19 @@
 "use client";
 
+import { AnimatePresence, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
+
+const navigation = [
+  { name: "NOTRE TRAVAIL", href: "/montravail/artsculinaires", hiddenPath: "montravail" },
+  { name: "CONTACT", href: "/contact", hiddenPath: "contact" },
+];
 
 export const Navigation: React.FC = () => {
 	const ref = useRef<HTMLElement>(null);
 	const [currentPath, setCurrentPath] = useState<string>("");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	useEffect(() => {
 		if (typeof window !== "undefined") {
@@ -14,39 +22,60 @@ export const Navigation: React.FC = () => {
 	}, []);
 
 	return (
-		<header ref={ref}>
-			<div className="fixed inset-x-0 top-0 z-50 bg-black">
-				<div className="w-screen flex items-center justify-between px-24 h-24 mx-auto">
-					<Link href="/">
-						<img className="w-36 cursor-pointer" src="/logo.png" alt="Logo" />
-					</Link>
-					<nav className="animate-fade-in">
-						<ul className="flex items-center justify-center gap-8">
-							{currentPath !== "/montravail/artsculinaires" &&
-								currentPath !== "/montravail/courtsmetrages" &&
-								currentPath !== "/montravail/publicites" &&
-								currentPath !== "/montravail/documentaires" && (
-									<Link
-										href="/montravail/artsculinaires"
-										className="text-sm duration-100 text-zinc-300 hover:text-zinc-100"
-										style={{ fontSize: "1.15rem", fontFamily: "Phonk", opacity: 0.6 }}
-									>
-										NOTRE TRAVAIL
-									</Link>
-								)}
-							{currentPath !== "/contact" && (
+		<>
+			<header className="w-screen flex items-center justify-between fixed top-0 px-0 md:px-24 h-24 bg-black-alpha-95 backdrop-blur-2xl z-50" ref={ref}>
+				<Link href="/">
+					<img className="w-36 cursor-pointer mx-8 md:mx-0" src="/logo.png" alt="Logo" />
+				</Link>
+
+				<nav className="my-16 animate-fade-in">
+					<ul className="hidden md:flex items-center justify-center gap-8">
+						{navigation.map((item) => {
+							if (currentPath.includes(item.hiddenPath)) {
+								return null;
+							}
+							return (
+								<li key={item.href}>
+									<Link href={item.href} className={`${currentPath === "/" ? "text-md" : "text-sm"} duration-500 text-zinc-500 hover:text-zinc-300`}>{item.name}</Link>
+								</li>
+							);
+						})}
+					</ul>
+					<button className="md:hidden text-white mx-8 md:mx-0" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+						<Menu />
+					</button>
+				</nav>
+			</header>
+
+			{isMenuOpen && (
+				<AnimatePresence>
+					<motion.div
+						key={isMenuOpen ? "open" : "closed"}
+						initial={{ opacity: 0, y: -25 }}
+						animate={{ opacity: 1, y: 0 }}
+						exit={{ opacity: 0, y: -25 }}
+						transition={{ duration: 0.1 }}
+						className="fixed top-0 left-0 w-screen h-screen bg-black-alpha-70 backdrop-blur-2xl z-50"
+					>
+					<button className="absolute top-8 right-1 md:right-0 mx-8 md:mx-0" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+						<X className="text-white" />
+					</button>
+					<ul className="flex flex-col items-center justify-center h-full">
+						{navigation.map((item) => (
+							<li key={item.href}>
 								<Link
-									href="/contact"
-									className="text-sm duration-100 text-zinc-300 hover:text-zinc-100"
-									style={{ fontSize: "1.15rem", fontFamily: "Phonk", opacity: 0.6 }}
+									href={item.href}
+									style={{ fontSize: "1.15rem", fontFamily: "Phonk, sans-serif" }}
+									className="text-sm duration-500 text-zinc-500 hover:text-zinc-300"
 								>
-									CONTACT
+									{item.name}
 								</Link>
-							)}
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</header>
+							</li>
+						))}
+					</ul>
+					</motion.div>
+				</AnimatePresence>
+			)}
+		</>
 	);
 };
