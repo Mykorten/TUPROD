@@ -1,8 +1,11 @@
 "use client";
+
 import React from "react";
 import { ProjectLayout } from "../components/project-layout";
 import { Footer } from "@/app/components/footer";
 import { CLOUD_SOURCE } from "@/app/constants/video-source";
+import { PageDisplay } from "@/app/components/page-display";
+import { useIsMobile } from "@/app/hooks/use-is-mobile";
 
 const previoustitle = "ARTS CULINAIRES";
 const nexttitle = "DOCUMENTAIRES";
@@ -15,14 +18,10 @@ const videos = [
 ];
 
 export default function ProjectsPage() {
-    return (
-        <div className="bg-black min-h-screen flex flex-col justify-between">
-            <ProjectLayout
-                title={title}
-                source={CLOUD_SOURCE}
-                videos={videos}
-            />
+    const isMobile = useIsMobile();
 
+    return (
+        <PageDisplay footer={
             <Footer
                 previoustitle={previoustitle}
                 previousLink="/montravail/artsculinaires"
@@ -31,6 +30,13 @@ export default function ProjectsPage() {
                 nextVisible={nextVisible}
                 previousVisible={previousVisible}
             />
-        </div>
+        }>
+            <ProjectLayout
+                    title={title}
+                    source={CLOUD_SOURCE}
+                    videos={videos}
+                    legendPlacement={isMobile ? "bottom" : "overlay"}
+                />
+        </PageDisplay>
     );
 }

@@ -125,7 +125,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
                     return (
                         <div    
                             key={video.src}
-                            className={`video-container relative w-screen min-h-[475px] ${(isUniqueVideo || orientation === "horizontal") ? 'px-0' : 'px-16'} md:px-0 flex ${legendPlacement === "bottom" ? 'flex-col' : ''} flex-shrink-0 md:flex-shrink md:min-w-0 ${widthClass} h-auto ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition duration-500`}
+                            className={`video-container relative w-screen ${orientation === "vertical" ? "min-h-[475px]" : ""} ${(isUniqueVideo || orientation === "horizontal") ? 'px-0' : 'px-16'} md:px-0 flex ${legendPlacement === "bottom" ? 'flex-col' : ''} flex-shrink-0 md:flex-shrink md:min-w-0 ${widthClass} h-auto ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition duration-500`}
                             onMouseEnter={() => !isMobile && setHoveredVideoSrc(video.src)}
                             onMouseLeave={() => !isMobile && setHoveredVideoSrc(null)}
                         >
