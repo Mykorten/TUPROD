@@ -29,7 +29,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (videosLoadedCount >= 2) {
+    if (videosLoadedCount >= 1) {
       setAllVideosLoaded(true);
     }
   }, [videosLoadedCount]);
