@@ -63,7 +63,7 @@ export default function Home() {
 
       <Navigation />
 
-      <div className="flex flex-col items-center justify-center mt-48 space-y-8 md:space-y-60 mb-32">
+      <div className="flex flex-col items-center justify-center mt-48 space-y-8 md:space-y-60 mb-48">
         {sections.map((section) => (
           <MainSection key={section.href} section={section} />
         ))}
