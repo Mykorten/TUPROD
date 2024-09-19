@@ -28,6 +28,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
     const isMobile = useIsMobile();
     const containerRef = useRef<HTMLDivElement>(null);
     const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
+    const videoContainerRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
     const isUniqueVideo = videos.length === 1;  
 
     // Calculate the width class based on the number of videos
@@ -37,6 +38,13 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
     };
 
     const widthClass = getWidthClass(videos.length);
+
+    const scrollToVideo = (videoSrc: string) => {
+        const containerElement = videoContainerRefs.current[videoSrc];
+        if (containerElement) {
+            containerElement.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    };
 
     useEffect(() => {
         const timeOut = setTimeout(() => {
@@ -135,6 +143,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
                     return (
                         <div    
                             key={video.src}
+                            ref={(el) => videoContainerRefs.current[video.src] = el}
                             className={`video-container relative w-screen ${orientation === "vertical" ? "min-h-[475px]" : ""} ${(isUniqueVideo || orientation === "horizontal") ? 'px-0' : 'px-16'} md:px-0 flex ${legendPlacement === "bottom" ? 'flex-col' : ''} flex-shrink-0 md:flex-shrink md:min-w-0 ${widthClass} h-auto ${allVideosLoaded ? "opacity-100" : "opacity-0"} transition duration-500`}
                             onMouseEnter={() => !isMobile && setHoveredVideoSrc(video.src)}
                             onMouseLeave={() => !isMobile && setHoveredVideoSrc(null)}
@@ -177,9 +186,14 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
             </div>
             {isMobile && !isUniqueVideo && (
                     <div className="flex flex-row justify-center items-center space-x-4 h-8">
-                        {videos.map((_, index) => {
+                        {videos.map((video, index) => {
                             return (
-                                <div className={`w-1 h-1 rounded-full ${index === currentVideoIndex ? "bg-white shadow-nav-dot" : "bg-zinc-500"} transition duration-500`}></div>
+                                <div
+                                    onClick={() => {
+                                        scrollToVideo(video.src);
+                                    }}
+                                    className={`w-1 h-1 rounded-full ${index === currentVideoIndex ? "bg-white shadow-nav-dot" : "bg-zinc-500"} transition duration-500`}>    
+                                </div>
                             )
                         })}
                     </div>
