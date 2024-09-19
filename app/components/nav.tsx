@@ -28,30 +28,17 @@ export const Navigation: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
-	const [isNavigating, setIsNavigating] = useState(false);
 
 	const handleScroll = useCallback(() => {
-		if (isNavigating) return;
-		
 		const currentScrollY = window.scrollY;
-		if (currentScrollY > lastScrollY) {
-			setIsScrollingDown(true);
-		} else if (currentScrollY < lastScrollY) {
-			setIsScrollingDown(false);
-		}
+		setIsScrollingDown(currentScrollY >= lastScrollY);
 		setLastScrollY(currentScrollY);
-	}, [lastScrollY, isNavigating]);
+	}, [lastScrollY]);
 
 	useEffect(() => {
-		setIsNavigating(true);
-		if (pathname !== "/") {
+		if (pathname !== "/" && isMobile) {
 			setIsScrollingDown(true);
-			setLastScrollY(0);
-			window.scrollTo(0, 0);
 		}
-		// Use a timeout to ensure navigation is complete before re-enabling scroll handling
-		const timer = setTimeout(() => setIsNavigating(false), 100);
-		return () => clearTimeout(timer);
 	}, [pathname]);
 
 	useEffect(() => {
