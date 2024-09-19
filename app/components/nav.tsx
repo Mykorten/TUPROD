@@ -27,7 +27,7 @@ export const Navigation: React.FC = () => {
 	const isMobile = useIsMobile();
 	const [currentPath, setCurrentPath] = useState<string>("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const [isScrollingDown, setIsScrollingDown] = useState(pathname !== "/" && isMobile);
   const [lastScrollY, setLastScrollY] = useState(0);
 
 
@@ -54,7 +54,7 @@ export const Navigation: React.FC = () => {
 
       const handleScroll = () => {
         const currentScrollY = window.scrollY;
-        if (currentScrollY > lastScrollY) {
+        if (currentScrollY > lastScrollY || currentScrollY === 0 && pathname !== "/") {
           setIsScrollingDown(true);
         } else {
           setIsScrollingDown(false);
