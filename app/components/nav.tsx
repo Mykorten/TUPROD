@@ -45,7 +45,7 @@ export const Navigation: React.FC = () => {
 				document.body.scrollTop = 0;
 				document.documentElement.scrollTop = 0;
 			}
-		}, 0);
+		}, 500);
 	}, [pathname]);
 
 	useEffect(() => {
