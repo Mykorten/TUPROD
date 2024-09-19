@@ -18,7 +18,7 @@ export function MainSection({ section, onVideoLoaded }: SectionProps) {
 	useEffect(() => {
     const options = {
       root: null,
-      rootMargin: '-20% 0px -35% 0px',
+      rootMargin: '-20% 0px -25% 0px',
       threshold: 0.5
     };
 
@@ -81,7 +81,7 @@ export function MainSection({ section, onVideoLoaded }: SectionProps) {
 					setHoveredTitle(null);
 				}}
 			>
-				<MainTitle title={section.name} />
+				<MainTitle title={section.name} isLoading={!hasLoaded} />
 
 				{hoveredTitle === section.name && (
 					<video
@@ -111,7 +111,7 @@ export function MainSection({ section, onVideoLoaded }: SectionProps) {
 				</div>
 
 				<div className="absolute inset-0 flex items-center justify-center">
-					<MainTitle title={section.name} /> 
+					<MainTitle title={section.name} isLoading={!hasLoaded} /> 
 				</div>
 			</div>
 		</Link>
