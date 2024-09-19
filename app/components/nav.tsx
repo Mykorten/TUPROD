@@ -23,6 +23,9 @@ export const Navigation: React.FC = () => {
 	const ref = useRef<HTMLElement>(null);
 	const [currentPath, setCurrentPath] = useState<string>("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
 
 	useEffect(() => {
 		if (typeof window !== "undefined") {
@@ -30,9 +33,33 @@ export const Navigation: React.FC = () => {
 		}
 	}, []);
 
+	useEffect(() => {
+    if (typeof window !== "undefined") {
+      setCurrentPath(window.location.pathname);
+
+      const handleScroll = () => {
+        const currentScrollY = window.scrollY;
+        if (currentScrollY > lastScrollY) {
+          setIsScrollingDown(true);
+        } else {
+          setIsScrollingDown(false);
+        }
+        setLastScrollY(currentScrollY);
+      };
+
+      window.addEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, [lastScrollY]);
+
 	return (
 		<>
-			<header className="w-screen flex items-center justify-between fixed top-0 px-0 md:px-24 h-24 bg-black-alpha-95 backdrop-blur-2xl z-50" ref={ref}>
+			<header className={`w-screen flex items-center justify-between fixed top-0 px-0 md:px-24 h-24 bg-black-alpha-95 backdrop-blur-2xl z-50 transition-transform duration-300 ${
+          isScrollingDown ? "transform -translate-y-24" : "transform translate-y-0"
+        }`} ref={ref}>
 				<Link className="max-h-10 flex items-center mx-8 md:mx-0" href="/">
 					<img className="w-36 cursor-pointer" src="/logo.png" alt="Logo" />
 				</Link>
