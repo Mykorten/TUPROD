@@ -16,11 +16,12 @@ interface ProjectLayoutProps {
     videos: Video[];
     legendPlacement?: "overlay" | "bottom";
     orientation?: "horizontal" | "vertical";
+    multiVideoPage?: boolean;
 }
 
 const MOBILE_BREAKPOINT = 640;
 
-export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, videos, legendPlacement = "overlay", orientation = "horizontal" }) => {
+export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, videos, legendPlacement = "overlay", orientation = "horizontal", multiVideoPage = false }) => {
     const [allVideosLoaded, setAllVideosLoaded] = useState(false);
     const [videosLoadedCount, setVideosLoadedCount] = useState(0);
     const [activeVideoSrc, setActiveVideoSrc] = useState<string | null>(null);
@@ -29,7 +30,6 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
     const containerRef = useRef<HTMLDivElement>(null);
     const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
     const isUniqueVideo = videos.length === 1;  
-    const lastScrollLeft = useRef(0);
 
     // Calculate the width class based on the number of videos
     const getWidthClass = (numVideos: number) => {
@@ -90,18 +90,22 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
         videos.forEach((video) => {
             const videoElement = videoRefs.current[video.src];
             if (videoElement) {
-                const isActive = isMobile ? video.src === activeVideoSrc : video.src === hoveredVideoSrc;
+                const isActive = isMobile ? video.src === activeVideoSrc : (isUniqueVideo && !multiVideoPage) ? true :video.src === hoveredVideoSrc;
                 videoElement.muted = !isActive;
     
                 if (isActive) {
                     videoElement.play().catch(error => {
                         console.error("Error playing video:", error);
                         // Try to play unmuted if autoplay was blocked
-                        videoElement.muted = true;
+                        videoElement.muted = false;
                         videoElement.play().catch(e => console.error("Error playing muted video:", e));
                     });
-                } else {
+                } else if (!isUniqueVideo) {
                     videoElement.pause();
+                }
+
+                if (multiVideoPage && !isActive) {
+                    videoElement.muted = true;
                 }
             }
         });
@@ -131,7 +135,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
                         >
                             <video
                                 className={`object-cover w-full h-full project-layout-video transition duration-500 ${
-                                    isMobile ? (activeVideoSrc === video.src ? '' : 'blur-sm') : (hoveredVideoSrc === video.src ? '' : 'blur-sm')
+                                    isMobile ? (activeVideoSrc === video.src ? '' : 'blur-sm') : (hoveredVideoSrc === video.src || (isUniqueVideo && !multiVideoPage) ? '' : 'blur-sm')
                                 }`} 
                                 ref={(el) => videoRefs.current[video.src] = el}
                                 data-src={video.src}

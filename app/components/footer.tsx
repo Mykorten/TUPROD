@@ -15,7 +15,7 @@ export const Footer: React.FC<FooterProps> = ({ previoustitle, previousLink, nex
     return (
         <footer className="bg-black relative text-zinc-100 max-h-48">
             <div className={`z-50 duration-200 border-t ${previousVisible || nextVisible ? "bg-zinc-900/0 border-transparent" : "bg-zinc-900/500 border-zinc-800"}`}>
-                <div className="bottom-4 md:bottom-24 left-0 right-0 flex flex-col md:flex-row justify-between items-center px-2 md:px-24 pt-4">
+                <div className="bottom-4 md:bottom-24 left-0 right-0 flex flex-col md:flex-row justify-between items-center px-2 md:px-24 py-4 md:py-8">
                     {previousVisible && (
                         <div className="bg-black p-2 flex items-center">
                             <Link href={previousLink} className={`${nextVisible ? 'text-lg' : 'text-2xl'} md:text-4xl duration-500 hover:text-zinc-300 flex items-center leading-8`} style={{ fontFamily: "Phonk" }}>
@@ -31,10 +31,6 @@ export const Footer: React.FC<FooterProps> = ({ previoustitle, previousLink, nex
                             </Link>
                         </div>
                     )}
-                </div>
-
-                <div className="w-screen flex flex-col items-center justify-center px-24 h-24 bg-black text-zinc-500">
-
                 </div>
             </div>
         </footer>

@@ -29,13 +29,16 @@ export default function ProjectsPage() {
     }
 
     return (
-        <div className="bg-black h-screen overflow-hidden md:overflow-scroll md:min-h-screen flex flex-col justify-between">
-            <ProjectLayout
-                title={title}
-                source={CLOUD_SOURCE}
-                videos={displayVideos}
-                legendPlacement={isMobile ? "bottom" : "overlay"}
-            />
+        <div className="bg-black h-screen overflow-hidden md:overflow-scroll md:min-h-full flex flex-col justify-between">
+            <div className="md:mb-32">
+                <ProjectLayout
+                    title={title}
+                    source={CLOUD_SOURCE}
+                    videos={displayVideos}
+                    legendPlacement={isMobile ? "bottom" : "overlay"}
+                    multiVideoPage={true}
+                />
+            </div>
 
             {!isMobile && (
                 <div className="relative z-0 space-x-4 flex flex-row items-center bg-black mb-16 w-full">
