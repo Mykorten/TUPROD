@@ -6,7 +6,30 @@
 
 html, body {
   overscroll-behavior-y: none;
+  /* Disable scrollbars */
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
 }
+
+/* Disable scrollbars for WebKit browsers */
+html::-webkit-scrollbar, 
+body::-webkit-scrollbar {
+  display: none;
+}
+
+/* Disable text selection */
+* {
+  -webkit-user-select: none;  /* Safari */
+     -moz-user-select: none;  /* Firefox */
+      -ms-user-select: none;  /* IE10+/Edge */
+          user-select: none;  /* Standard */
+}
+
+@layer base {
+  .text-edge-outline {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+  }
+} 
 
 @layer base {
   .text-edge-outline {
