@@ -6,8 +6,10 @@ import { Navigation } from "./components/nav";
 import { MainSection } from "./components/main-display/main-section";
 import { sections } from "./models/section";
 import { MainLoadingScreen } from "./components/main-display/main-loading";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const router = useRouter();
   const [videosLoadedCount, setVideosLoadedCount] = useState(0);
   const [allVideosLoaded, setAllVideosLoaded] = useState(false);
 

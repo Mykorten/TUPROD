@@ -38,14 +38,14 @@ export const Navigation: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
+		setLastScrollY(0);
 		setTimeout(() => {
 			if (pathname !== "/" && isMobile) {
-				setIsScrollingDown(true);
-				window.scrollTo({ top: 0, behavior: 'smooth' });
 				document.body.scrollTop = 0;
 				document.documentElement.scrollTop = 0;
+				setIsScrollingDown(true);
 			}
-		}, 0);
+		}, 500);
 	}, [pathname]);
 
 	useEffect(() => {
