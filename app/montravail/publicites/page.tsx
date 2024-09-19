@@ -29,7 +29,7 @@ export default function ProjectsPage() {
     }
 
     return (
-        <div className="bg-black min-h-screen flex flex-col justify-between">
+        <div className="bg-black h-screen overflow-hidden md:overflow-scroll md:min-h-screen flex flex-col justify-between">
             <ProjectLayout
                 title={title}
                 source={CLOUD_SOURCE}

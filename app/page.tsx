@@ -7,8 +7,10 @@ import { MainSection } from "./components/main-display/main-section";
 import { sections } from "./models/section";
 import { MainLoadingScreen } from "./components/main-display/main-loading";
 import { AnimatePresence, motion } from "framer-motion";
+import { usePathname } from "next/navigation";
 
 export default function Home() {
+  const pathname = usePathname();
   const [videosLoadedCount, setVideosLoadedCount] = useState(0);
   const [allVideosLoaded, setAllVideosLoaded] = useState(false);
 
@@ -27,6 +29,10 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [pathname]);
 
   useEffect(() => {
     if (videosLoadedCount >= 1) {
