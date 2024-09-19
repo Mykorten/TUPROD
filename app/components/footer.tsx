@@ -18,7 +18,7 @@ export const Footer: React.FC<FooterProps> = ({ previoustitle, previousLink, nex
                 <div className="bottom-4 md:bottom-24 left-0 right-0 flex flex-col md:flex-row justify-between items-center px-2 md:px-24 py-4 md:py-8">
                     {previousVisible && (
                         <div className="bg-black p-2 flex items-center">
-                            <Link href={previousLink} className={`${nextVisible ? 'text-lg' : 'text-2xl'} md:text-4xl duration-500 hover:text-zinc-300 flex items-center leading-8`} style={{ fontFamily: "Phonk" }}>
+                            <Link href={previousLink} className={`${nextVisible ? 'text-lg' : 'text-2xl'} md:text-4xl hover:drop-shadow-main-title duration-500 hover:text-zinc-300 flex items-center leading-8`} style={{ fontFamily: "Phonk" }}>
                                 <ChevronLeft size={50} /> {previoustitle}
                             </Link>
                         </div>
@@ -26,7 +26,7 @@ export const Footer: React.FC<FooterProps> = ({ previoustitle, previousLink, nex
                     <div className="flex-grow"></div>
                     {nextVisible && (
                         <div className="bg-black p-2 rounded-md flex items-center">
-                            <Link href={nextLink} className={`${previousVisible ? 'text-lg' : 'text-2xl'} md:text-4xl duration-500 hover:text-zinc-300 flex items-center leading-8`} style={{ fontFamily: "Phonk" }}>
+                            <Link href={nextLink} className={`${previousVisible ? 'text-lg' : 'text-2xl'} md:text-4xl hover:drop-shadow-main-title duration-500 hover:text-zinc-300 flex items-center leading-8`} style={{ fontFamily: "Phonk" }}>
                                 {nexttitle} <ChevronRight size={50} />
                             </Link>
                         </div>
