@@ -3,7 +3,9 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useEffect, useRef, useState } from "react";
+import { useIsMobile } from "../hooks/use-is-mobile";
 
 const navigation = [
   { name: "NOTRE TRAVAIL", href: "/montravail/artsculinaires", hiddenPath: "montravail" },
@@ -21,6 +23,8 @@ const mobileNavigation = [
 
 export const Navigation: React.FC = () => {
 	const ref = useRef<HTMLElement>(null);
+	const pathname = usePathname();
+	const isMobile = useIsMobile();
 	const [currentPath, setCurrentPath] = useState<string>("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
@@ -32,6 +36,13 @@ export const Navigation: React.FC = () => {
 			setCurrentPath(window.location.pathname);
 		}
 	}, []);
+
+	useEffect(() => {
+		if (pathname !== "/" && isMobile) {
+			setIsScrollingDown(true);
+			window.scrollTo({ top: 0, behavior: 'smooth' });
+		}
+	}, [pathname]);
 
 	useEffect(() => {
     if (typeof window !== "undefined") {

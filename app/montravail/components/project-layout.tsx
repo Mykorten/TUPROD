@@ -19,8 +19,6 @@ interface ProjectLayoutProps {
     multiVideoPage?: boolean;
 }
 
-const MOBILE_BREAKPOINT = 640;
-
 export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, videos, legendPlacement = "overlay", orientation = "horizontal", multiVideoPage = false }) => {
     const [allVideosLoaded, setAllVideosLoaded] = useState(false);
     const [videosLoadedCount, setVideosLoadedCount] = useState(0);
