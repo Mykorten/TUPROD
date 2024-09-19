@@ -38,10 +38,14 @@ export const Navigation: React.FC = () => {
 	}, []);
 
 	useEffect(() => {
-		if (pathname !== "/" && isMobile) {
-			setIsScrollingDown(true);
-			window.scrollTo({ top: 0, behavior: 'smooth' });
-		}
+		setTimeout(() => {
+			if (pathname !== "/" && isMobile) {
+				setIsScrollingDown(true);
+				window.scrollTo({ top: 0, behavior: 'smooth' });
+				document.body.scrollTop = 0;
+				document.documentElement.scrollTop = 0;
+			}
+		}, 0);
 	}, [pathname]);
 
 	useEffect(() => {
@@ -68,10 +72,10 @@ export const Navigation: React.FC = () => {
 
 	return (
 		<>
-			<header className={`w-screen flex items-center justify-between fixed top-0 px-0 md:px-24 h-24 bg-black-alpha-95 backdrop-blur-2xl z-50 transition-transform duration-300 ${
-          isScrollingDown ? "transform -translate-y-24" : "transform translate-y-0"
+			<header className={`w-screen flex items-center justify-between sticky top-0 px-0 md:px-24 h-24 bg-black-alpha-95 backdrop-blur-2xl z-50 transition-all duration-500 ${
+          isScrollingDown ? "transform -translate-y-24 opacity-0 h-12" : "transform translate-y-0"
         }`} ref={ref}>
-				<Link className="max-h-10 flex items-center mx-8 md:mx-0" href="/">
+				<Link className="max-h-10 flex items-center mx-8 md:mx-0 animate-fade-in" href="/">
 					<img className="w-36 cursor-pointer" src="/logo.png" alt="Logo" />
 				</Link>
 

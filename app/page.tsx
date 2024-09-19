@@ -6,11 +6,8 @@ import { Navigation } from "./components/nav";
 import { MainSection } from "./components/main-display/main-section";
 import { sections } from "./models/section";
 import { MainLoadingScreen } from "./components/main-display/main-loading";
-import { AnimatePresence, motion } from "framer-motion";
-import { usePathname } from "next/navigation";
 
 export default function Home() {
-  const pathname = usePathname();
   const [videosLoadedCount, setVideosLoadedCount] = useState(0);
   const [allVideosLoaded, setAllVideosLoaded] = useState(false);
 
@@ -29,10 +26,6 @@ export default function Home() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [pathname]);
 
   useEffect(() => {
     if (videosLoadedCount >= 1) {
@@ -73,7 +66,7 @@ export default function Home() {
 
       {allVideosLoaded && <Navigation />}
   
-      <div className={`flex flex-col items-center justify-center mt-48 space-y-8 md:space-y-60 mb-48 ${allVideosLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}>
+      <div className={`flex flex-col items-center justify-center mt-8 md:mt-48 space-y-8 md:space-y-60 mb-48 ${allVideosLoaded ? 'opacity-100' : 'opacity-0'} transition-opacity duration-1000`}>
         {sections.map((section) => (
           <MainSection key={section.href} section={section} onVideoLoaded={() => {
             handleVideoLoaded();

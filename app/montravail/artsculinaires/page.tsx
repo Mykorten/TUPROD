@@ -21,7 +21,7 @@ export default function ProjectsPage() {
     const [hovered, setHovered] = useState<boolean>();
 
     return (
-        <div className="bg-black">
+        <div className="bg-black pb-48">
             <ProjectLayout
                 title={title}
                 source={CLOUD_SOURCE}

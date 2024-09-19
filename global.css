@@ -4,6 +4,10 @@
 @import url('https://fonts.googleapis.com/css2?family=AnotherFont:wght@400;700&display=swap');
 
 
+html, body {
+  overscroll-behavior-y: none;
+}
+
 @layer base {
   .text-edge-outline {
     -webkit-text-stroke: 1px rgba(255,255,255,0.3);
@@ -52,3 +56,4 @@ body {
   -webkit-animation: drawIn 2.5s 1s ease-in both;
           animation: drawIn 2.5s 1s ease-in both;
 }
+
