@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useIsMobile } from "../hooks/use-is-mobile";
 
 const navigation = [
@@ -25,50 +25,41 @@ export const Navigation: React.FC = () => {
 	const ref = useRef<HTMLElement>(null);
 	const pathname = usePathname();
 	const isMobile = useIsMobile();
-	const [currentPath, setCurrentPath] = useState<string>("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+	const [isNavigating, setIsNavigating] = useState(false);
 
-
-	useEffect(() => {
-		if (typeof window !== "undefined") {
-			setCurrentPath(window.location.pathname);
+	const handleScroll = useCallback(() => {
+		if (isNavigating) return;
+		
+		const currentScrollY = window.scrollY;
+		if (currentScrollY > lastScrollY) {
+			setIsScrollingDown(true);
+		} else if (currentScrollY < lastScrollY) {
+			setIsScrollingDown(false);
 		}
-	}, []);
+		setLastScrollY(currentScrollY);
+	}, [lastScrollY, isNavigating]);
 
 	useEffect(() => {
-		setLastScrollY(0);
-		setTimeout(() => {
-			if (pathname !== "/" && isMobile) {
-				document.body.scrollTop = 0;
-				document.documentElement.scrollTop = 0;
-				setIsScrollingDown(true);
-			}
-		}, 500);
+		setIsNavigating(true);
+		if (pathname !== "/") {
+			setIsScrollingDown(true);
+			setLastScrollY(0);
+			window.scrollTo(0, 0);
+		}
+		// Use a timeout to ensure navigation is complete before re-enabling scroll handling
+		const timer = setTimeout(() => setIsNavigating(false), 100);
+		return () => clearTimeout(timer);
 	}, [pathname]);
 
 	useEffect(() => {
-    if (typeof window !== "undefined") {
-      setCurrentPath(window.location.pathname);
-
-      const handleScroll = () => {
-        const currentScrollY = window.scrollY;
-        if (currentScrollY > lastScrollY || (currentScrollY === 0 && lastScrollY === 0 && pathname !== "/")) {
-          setIsScrollingDown(true);
-        } else {
-          setIsScrollingDown(false);
-        }
-        setLastScrollY(currentScrollY);
-      };
-
-      window.addEventListener("scroll", handleScroll);
-
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
-    }
-  }, [lastScrollY]);
+		if (typeof window !== "undefined") {
+			window.addEventListener("scroll", handleScroll);
+			return () => window.removeEventListener("scroll", handleScroll);
+		}
+	}, [handleScroll]);
 
 	return (
 		<>
@@ -82,12 +73,12 @@ export const Navigation: React.FC = () => {
 				<nav className="my-16 animate-fade-in">
 					<ul className="hidden md:flex items-center justify-center gap-8">
 						{navigation.map((item) => {
-							if (currentPath.includes(item.hiddenPath)) {
+							if (pathname.includes(item.hiddenPath)) {
 								return null;
 							}
 							return (
 								<li key={item.href}>
-									<Link href={item.href} className={`${currentPath === "/" ? "text-md" : "text-sm"} duration-500 text-zinc-500 hover:text-zinc-300`}>{item.name}</Link>
+									<Link href={item.href} className={`${pathname === "/" ? "text-md" : "text-sm"} duration-500 text-zinc-500 hover:text-zinc-300`}>{item.name}</Link>
 								</li>
 							);
 						})}
@@ -117,7 +108,7 @@ export const Navigation: React.FC = () => {
 								return null;
 							}
 
-							if (currentPath === item.hiddenAbsolutePath) {
+							if (pathname === item.hiddenAbsolutePath) {
 								return null;
 							}
 
