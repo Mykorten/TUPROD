@@ -28,6 +28,9 @@ module.exports = {
 					},
 				},
 			},
+			boxShadow: {
+				"nav-dot": "0 0 5px 3px rgba(255, 255, 255, 0.25)",
+			},
 			dropShadow: {
 				"main-title": [
 					"0 0 10px rgba(255, 255, 255, 0.5)",

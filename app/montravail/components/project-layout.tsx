@@ -22,6 +22,7 @@ interface ProjectLayoutProps {
 export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, videos, legendPlacement = "overlay", orientation = "horizontal", multiVideoPage = false }) => {
     const [allVideosLoaded, setAllVideosLoaded] = useState(false);
     const [videosLoadedCount, setVideosLoadedCount] = useState(0);
+    const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
     const [activeVideoSrc, setActiveVideoSrc] = useState<string | null>(null);
     const [hoveredVideoSrc, setHoveredVideoSrc] = useState<string | null>(null);
     const isMobile = useIsMobile();
@@ -83,6 +84,13 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
             observer.disconnect();
         };
     }, [videos, isMobile]);
+
+    useEffect(() => {
+        const index = videos.findIndex(video => video.src === activeVideoSrc);
+        if (index !== -1) {
+            setCurrentVideoIndex(index);
+        }
+    }, [activeVideoSrc, videos]);
 
     useEffect(() => {
         videos.forEach((video) => {
@@ -167,6 +175,15 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
                     )
                 })}
             </div>
+            {isMobile && !isUniqueVideo && (
+                    <div className="flex flex-row justify-center items-center space-x-4 h-8">
+                        {videos.map((_, index) => {
+                            return (
+                                <div className={`w-1 h-1 rounded-full ${index === currentVideoIndex ? "bg-white shadow-nav-dot" : "bg-zinc-500"} transition duration-500`}></div>
+                            )
+                        })}
+                    </div>
+                )}
 
             <style jsx>{`
                 .video-container {
