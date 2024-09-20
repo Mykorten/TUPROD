@@ -15,11 +15,12 @@ interface ProjectLayoutProps {
     source: string;
     videos: Video[];
     legendPlacement?: "overlay" | "bottom";
+    bandMainVideo?: boolean;
     orientation?: "horizontal" | "vertical";
     multiVideoPage?: boolean;
 }
 
-export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, videos, legendPlacement = "overlay", orientation = "horizontal", multiVideoPage = false }) => {
+export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, videos, legendPlacement = "overlay", orientation = "horizontal", multiVideoPage = false, bandMainVideo = false }) => {
     const [allVideosLoaded, setAllVideosLoaded] = useState(false);
     const [videosLoadedCount, setVideosLoadedCount] = useState(0);
     const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
@@ -129,7 +130,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
         <div className="bg-black min-h-fit md:min-h-screen text-white mb-8">
             <Navigation />
 
-            <div className="flex flex-col items-center justify-center md:mt-32 mb-8 px-8 relative z-10">
+            <div className={`flex flex-col items-center justify-center md:mt-16 mb-8 px-8 relative z-10 ${bandMainVideo ? 'md:mb-0' : 'md:mb-16'}`}>
                 <h1
                     className={`text-3xl text-zinc-100 duration-500 font-display sm:text-6xl md:text-7xl ${!allVideosLoaded ? 'animate-pulse' : ''}`}
                     style={{ fontFamily: "Phonk" }}

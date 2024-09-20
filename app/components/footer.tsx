@@ -21,7 +21,7 @@ export const Footer: React.FC<FooterProps> = ({ previoustitle, previousLink, nex
             const scrollPosition = window.scrollY;
             const windowHeight = window.innerHeight;
             const documentHeight = document.documentElement.scrollHeight;
-            const scrollThreshold = 100; // Adjust this value to change when the footer appears
+            const scrollThreshold = 50; // Adjust this value to change when the footer appears
 
             setIsVisible(documentHeight - (scrollPosition + windowHeight) < scrollThreshold);
         };
@@ -36,7 +36,7 @@ export const Footer: React.FC<FooterProps> = ({ previoustitle, previousLink, nex
             <div className="bottom-4 md:bottom-24 left-0 right-0 flex flex-col md:flex-row justify-between items-center px-2 md:px-24 py-4 md:py-8">
                 {previousVisible && (
                     <div className="p-2 flex items-center">
-                        <Link href={previousLink} scroll={false} className={`${nextVisible ? 'text-lg' : 'text-2xl'} md:text-4xl hover:drop-shadow-main-title duration-500 hover:text-zinc-300 flex items-center leading-8`} style={{ fontFamily: "Phonk" }}>
+                        <Link href={previousLink} scroll={true} className={`${nextVisible ? 'text-lg' : 'text-2xl'} md:text-4xl hover:drop-shadow-main-title duration-500 hover:text-zinc-300 flex items-center leading-8`} style={{ fontFamily: "Phonk" }}>
                             <ChevronLeft size={50} /> {previoustitle}
                         </Link>
                     </div>
@@ -44,7 +44,7 @@ export const Footer: React.FC<FooterProps> = ({ previoustitle, previousLink, nex
                 <div className="flex-grow"></div>
                 {nextVisible && (
                     <div className="p-2 flex items-center">
-                        <Link href={nextLink} scroll={false} className={`${previousVisible ? 'text-lg' : 'text-2xl'} md:text-4xl hover:drop-shadow-main-title duration-500 hover:text-zinc-300 flex items-center leading-8`} style={{ fontFamily: "Phonk" }}>
+                        <Link href={nextLink} scroll={true} className={`${previousVisible ? 'text-lg' : 'text-2xl'} md:text-4xl hover:drop-shadow-main-title duration-500 hover:text-zinc-300 flex items-center leading-8`} style={{ fontFamily: "Phonk" }}>
                             {nexttitle} <ChevronRight size={50} />
                         </Link>
                     </div>

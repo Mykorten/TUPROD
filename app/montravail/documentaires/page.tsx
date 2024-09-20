@@ -36,6 +36,7 @@ export default function ProjectsPage() {
                 source={CLOUD_SOURCE}
                 videos={videos}
                 legendPlacement={isMobile ? "bottom" : "overlay"}
+                bandMainVideo={true}
             />
         </PageDisplay>
     );

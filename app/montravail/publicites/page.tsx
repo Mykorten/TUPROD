@@ -29,7 +29,7 @@ export default function ProjectsPage() {
     }
 
     return (
-        <div className="bg-black h-screen overflow-hidden md:overflow-scroll md:min-h-full flex flex-col justify-between">
+        <div className="bg-black min-h-screen overflow-hidden md:overflow-scroll flex flex-col justify-between">
             <div className="md:mb-32">
                 <ProjectLayout
                     title={title}
@@ -37,6 +37,7 @@ export default function ProjectsPage() {
                     videos={displayVideos}
                     legendPlacement={isMobile ? "bottom" : "overlay"}
                     multiVideoPage={true}
+                    bandMainVideo={true}
                 />
             </div>
 

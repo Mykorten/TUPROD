@@ -32,11 +32,12 @@ export default function ProjectsPage() {
             />
         }>
             <ProjectLayout
-                    title={title}
-                    source={CLOUD_SOURCE}
-                    videos={videos}
-                    legendPlacement={isMobile ? "bottom" : "overlay"}
-                />
+                title={title}
+                source={CLOUD_SOURCE}
+                videos={videos}
+                legendPlacement={isMobile ? "bottom" : "overlay"}
+                bandMainVideo={true}
+            />
         </PageDisplay>
     );
 }
