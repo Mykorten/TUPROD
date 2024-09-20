@@ -129,7 +129,7 @@ export const ProjectLayout: React.FC<ProjectLayoutProps> = ({ title, source, vid
         <div className="bg-black min-h-fit md:min-h-screen text-white mb-8">
             <Navigation />
 
-            <div className="flex flex-col items-center justify-center md:mt-32 mb-8 md:mb-16 px-8 relative z-10">
+            <div className="flex flex-col items-center justify-center md:mt-32 mb-8 px-8 relative z-10">
                 <h1
                     className={`text-3xl text-zinc-100 duration-500 font-display sm:text-6xl md:text-7xl ${!allVideosLoaded ? 'animate-pulse' : ''}`}
                     style={{ fontFamily: "Phonk" }}
